@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\USUARIO\\\\Documents\\\\GitHub\\\\insumma-intranet\\\\assets\\\\img\\\\sicreo\")"
+    ]
+  }
+}
