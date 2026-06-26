@@ -637,7 +637,7 @@
                 const data = await res.json();
 
                 if (data.success) {
-                    window.location.href = data.redirect || 'dashboard/index.html';
+                    window.location.href = data.redirect || 'dashboard.html';
                 } else {
                     alertMsg.textContent = data.error || 'Credenciales incorrectas.';
                     alertError.classList.add('visible');
