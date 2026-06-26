@@ -591,6 +591,111 @@
             .content-area { padding: 16px; }
             .sm-main-grid { grid-template-columns: 1fr !important; }
         }
+
+        /* ─── ENTÉRATE ─── */
+        .et-tabs { display:flex; gap:6px; margin-bottom:22px; border-bottom:2px solid var(--gray-border); padding-bottom:0; }
+        .et-tab  {
+            padding:9px 22px; border:none; background:none; font-size:13px; font-weight:600;
+            color:var(--gray-text); cursor:pointer; border-bottom:3px solid transparent;
+            margin-bottom:-2px; border-radius:6px 6px 0 0; transition:color .18s,border-color .18s,background .18s;
+        }
+        .et-tab:hover  { background:#F0F2F5; color:var(--dark-text); }
+        .et-tab.active { color:var(--green-main); border-bottom-color:var(--green-main); background:#F1F8F2; }
+
+        .et-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; }
+
+        .et-card {
+            background:#fff; border:1px solid var(--gray-border); border-radius:14px;
+            overflow:hidden; cursor:pointer;
+            transition:transform .18s,box-shadow .18s,border-color .18s;
+            display:flex; flex-direction:column;
+        }
+        .et-card:hover { transform:translateY(-4px); box-shadow:0 8px 28px rgba(0,0,0,.10); border-color:var(--green-main); }
+
+        .et-card-cover { position:relative; height:200px; overflow:hidden; flex-shrink:0; }
+        .et-card-cover img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s; }
+        .et-card:hover .et-card-cover img { transform:scale(1.04); }
+
+        .et-thumb-strip {
+            position:absolute; bottom:8px; right:10px;
+            display:flex; gap:5px; align-items:center;
+        }
+        .et-thumb {
+            width:36px; height:36px; border-radius:6px; object-fit:cover;
+            border:2px solid rgba(255,255,255,.8); box-shadow:0 2px 6px rgba(0,0,0,.25);
+            cursor:pointer; transition:transform .15s;
+        }
+        .et-thumb:hover { transform:scale(1.1); }
+        .et-more-badge {
+            width:36px; height:36px; border-radius:6px; background:rgba(0,0,0,.55);
+            border:2px solid rgba(255,255,255,.8); display:flex; align-items:center; justify-content:center;
+            font-size:11px; font-weight:700; color:#fff;
+        }
+        .et-card-body { padding:18px; flex:1; display:flex; flex-direction:column; gap:6px; }
+        .et-card-tag  { display:inline-block; font-size:10px; font-weight:700; padding:3px 9px; border-radius:8px; text-transform:uppercase; align-self:flex-start; }
+        .et-card-title { font-size:14.5px; font-weight:700; color:var(--dark-text); line-height:1.4; }
+        .et-card-desc  { font-size:12.5px; color:var(--gray-text); line-height:1.55; flex:1; }
+        .et-card-meta  { font-size:11px; color:var(--gray-muted); margin-top:6px; display:flex; align-items:center; gap:6px; }
+        .et-read-more  { font-size:12px; font-weight:700; color:var(--green-main); text-decoration:none; display:flex; align-items:center; gap:4px; margin-top:4px; }
+
+        /* Modal overlay */
+        .et-overlay {
+            position:fixed; inset:0; background:rgba(0,0,0,.72); z-index:2000;
+            display:flex; align-items:center; justify-content:center; padding:20px;
+            animation:fadeInOv .22s ease;
+        }
+        @keyframes fadeInOv { from{opacity:0} to{opacity:1} }
+
+        .et-modal {
+            background:#fff; border-radius:18px; width:100%; max-width:800px;
+            max-height:90vh; overflow:hidden; display:flex; flex-direction:column;
+            box-shadow:0 24px 64px rgba(0,0,0,.35);
+            animation:slideUp .25s cubic-bezier(.32,.72,0,1);
+        }
+        @keyframes slideUp { from{transform:translateY(40px);opacity:0} to{transform:translateY(0);opacity:1} }
+
+        .et-modal-gallery { position:relative; height:340px; background:#111; flex-shrink:0; }
+        .et-modal-gallery img { width:100%; height:100%; object-fit:cover; display:block; }
+        .et-gal-btn {
+            position:absolute; top:50%; transform:translateY(-50%);
+            width:42px; height:42px; border-radius:50%; background:rgba(0,0,0,.5);
+            border:none; cursor:pointer; display:flex; align-items:center; justify-content:center;
+            color:#fff; font-size:22px; transition:background .15s;
+            backdrop-filter:blur(4px);
+        }
+        .et-gal-btn:hover { background:rgba(0,0,0,.75); }
+        .et-gal-prev { left:14px; }
+        .et-gal-next { right:14px; }
+        .et-gal-dots { position:absolute; bottom:12px; left:50%; transform:translateX(-50%); display:flex; gap:7px; }
+        .et-gal-dot  { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.45); cursor:pointer; transition:background .2s,transform .2s; }
+        .et-gal-dot.active { background:#fff; transform:scale(1.25); }
+        .et-gal-counter { position:absolute; top:12px; right:14px; background:rgba(0,0,0,.5); color:#fff; font-size:12px; font-weight:600; padding:4px 10px; border-radius:20px; backdrop-filter:blur(4px); }
+        .et-modal-close {
+            position:absolute; top:12px; left:14px; width:34px; height:34px;
+            border-radius:50%; background:rgba(0,0,0,.45); border:none; cursor:pointer;
+            color:#fff; font-size:19px; display:flex; align-items:center; justify-content:center;
+            transition:background .15s; backdrop-filter:blur(4px);
+        }
+        .et-modal-close:hover { background:rgba(0,0,0,.75); }
+        .et-modal-body { padding:28px 32px; overflow-y:auto; flex:1; }
+        .et-modal-body h2 { font-size:22px; font-weight:800; color:var(--dark-text); margin:10px 0 8px; line-height:1.35; }
+        .et-modal-body .et-mb-meta { font-size:12px; color:var(--gray-muted); margin-bottom:18px; display:flex; gap:12px; flex-wrap:wrap; }
+        .et-modal-body .et-mb-text { font-size:14px; color:#374151; line-height:1.75; }
+        .et-modal-body .et-mb-text p { margin-bottom:14px; }
+        .et-modal-body .et-mb-text strong { color:var(--dark-text); }
+        .et-modal-thumbs { display:flex; gap:8px; margin-top:18px; flex-wrap:wrap; }
+        .et-modal-thumb-btn {
+            width:70px; height:52px; border-radius:8px; overflow:hidden; border:2px solid transparent;
+            cursor:pointer; background:none; padding:0; transition:border-color .15s;
+        }
+        .et-modal-thumb-btn.active { border-color:var(--green-main); }
+        .et-modal-thumb-btn img { width:100%; height:100%; object-fit:cover; display:block; }
+
+        @media (max-width:600px) {
+            .et-modal-gallery { height:220px; }
+            .et-modal-body { padding:18px; }
+            .et-modal-body h2 { font-size:17px; }
+        }
     </style>
 </head>
 <body>
@@ -903,11 +1008,19 @@
         <!-- ══ ENTÉRATE ══ -->
         <section class="section" id="sec-enterate">
             <div class="page-title"><h2>Entérate</h2><p>Noticias, comunicados y novedades de Insumma Business Group</p></div>
-            <div class="section-grid">
-                <div class="sec-card"><span class="sc-tag" style="background:#E8F5E9;color:#2E7D32;">Corporativo</span><div class="sc-title">Nueva política de bienestar laboral 2026</div><div class="sc-desc">Conoce los cambios en los beneficios para todos los colaboradores. Se implementan nuevas jornadas flexibles y apoyo en salud mental.</div><div class="sc-footer">Hace 2 horas · Recursos Humanos</div></div>
-                <div class="sec-card"><span class="sc-tag" style="background:#FFF3E0;color:#F57C00;">Resultados</span><div class="sc-title">Q1 2026 — Superamos la meta comercial</div><div class="sc-desc">Salud Animal creció 18% y Nutrición animal 12%. Gracias a todo el equipo por el esfuerzo y dedicación.</div><div class="sc-footer">Hace 1 día · Gerencia General</div></div>
-                <div class="sec-card"><span class="sc-tag" style="background:#E3F2FD;color:#1565C0;">Formación</span><div class="sc-title">Inscripciones abiertas — Capacitación Q2</div><div class="sc-desc">Programa de formación en bioseguridad y nutrición animal disponible para todos los colaboradores. Cupos limitados.</div><div class="sc-footer">Hace 2 días · Gestión Humana</div></div>
-                <div class="sec-card"><span class="sc-tag" style="background:#E8F5E9;color:#2E7D32;">Sostenibilidad</span><div class="sc-title">Segunda fase del programa de reciclaje</div><div class="sc-desc">Iniciamos la segunda fase del programa de gestión ambiental en todas las instalaciones. Participa y marca la diferencia.</div><div class="sc-footer">Hace 3 días · HSEQ</div></div>
+
+            <!-- Tabs -->
+            <div class="et-tabs">
+                <button class="et-tab active" id="et-tab-noticias"    onclick="etTab('noticias')">Noticias</button>
+                <button class="et-tab"        id="et-tab-comunicados" onclick="etTab('comunicados')">Comunicados</button>
+            </div>
+
+            <!-- Grids (llenados por JS) -->
+            <div id="et-noticias-wrap">
+                <div class="et-grid" id="et-noticias-grid"></div>
+            </div>
+            <div id="et-comunicados-wrap" style="display:none;">
+                <div class="et-grid" id="et-comunicados-grid"></div>
             </div>
         </section>
 
@@ -1611,7 +1724,404 @@
             if (document.getElementById('sec-sumate').classList.contains('active')) drawChart(1);
         }, 150);
     });
+
+    // ══════════════════════════════════════
+    // ── ENTÉRATE — imágenes SVG de prueba ──
+    // ══════════════════════════════════════
+    function svgImg(c1, c2, iconPaths, label, sub) {
+        const dec = `<circle cx="680" cy="55" r="140" fill="rgba(255,255,255,.055)"/>
+                     <circle cx="750" cy="390" r="100" fill="rgba(255,255,255,.04)"/>
+                     <circle cx="70"  cy="330" r="120" fill="rgba(255,255,255,.05)"/>`;
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420">
+          <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/>
+          </linearGradient></defs>
+          <rect width="800" height="420" fill="url(#bg)"/>${dec}
+          ${iconPaths}
+          <text x="400" y="365" font-family="'Segoe UI',Arial,sans-serif" font-size="21" font-weight="700" fill="white" text-anchor="middle">${label}</text>
+          <text x="400" y="393" font-family="'Segoe UI',Arial,sans-serif" font-size="13" fill="rgba(255,255,255,.72)" text-anchor="middle">${sub}</text>
+        </svg>`;
+        return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    }
+
+    const IC = {
+        heart: `<circle cx="280" cy="165" r="26" fill="rgba(255,255,255,.18)"/>
+                <circle cx="280" cy="145" r="14" fill="white"/>
+                <ellipse cx="280" cy="177" rx="20" ry="16" fill="white"/>
+                <circle cx="340" cy="165" r="26" fill="rgba(255,255,255,.18)"/>
+                <circle cx="340" cy="145" r="14" fill="white"/>
+                <ellipse cx="340" cy="177" rx="20" ry="16" fill="white"/>
+                <circle cx="400" cy="165" r="26" fill="rgba(255,255,255,.18)"/>
+                <circle cx="400" cy="145" r="14" fill="white"/>
+                <ellipse cx="400" cy="177" rx="20" ry="16" fill="white"/>
+                <circle cx="460" cy="165" r="26" fill="rgba(255,255,255,.18)"/>
+                <circle cx="460" cy="145" r="14" fill="white"/>
+                <ellipse cx="460" cy="177" rx="20" ry="16" fill="white"/>
+                <circle cx="520" cy="165" r="26" fill="rgba(255,255,255,.18)"/>
+                <circle cx="520" cy="145" r="14" fill="white"/>
+                <ellipse cx="520" cy="177" rx="20" ry="16" fill="white"/>
+                <path d="M400 290 C400 290 310 240 310 195 C310 170 330 150 355 160 C370 166 400 185 400 185 C400 185 430 166 445 160 C470 150 490 170 490 195 C490 240 400 290 400 290Z" fill="rgba(255,255,255,.88)"/>`,
+
+        chart: `<rect x="260" y="230" width="42" height="85"  rx="5" fill="rgba(255,255,255,.55)"/>
+                <rect x="316" y="190" width="42" height="125" rx="5" fill="rgba(255,255,255,.70)"/>
+                <rect x="372" y="155" width="42" height="160" rx="5" fill="rgba(255,255,255,.85)"/>
+                <rect x="428" y="120" width="42" height="195" rx="5" fill="white"/>
+                <rect x="484" y="145" width="42" height="170" rx="5" fill="rgba(255,255,255,.80)"/>
+                <polyline points="281,230 337,192 393,157 449,122 505,147" stroke="rgba(255,255,255,.6)" stroke-width="3" fill="none" stroke-dasharray="6 3"/>
+                <polygon points="505,125 525,148 492,155" fill="rgba(255,255,255,.7)"/>`,
+
+        book:  `<rect x="310" y="130" width="80" height="115" rx="6" fill="rgba(255,255,255,.5)" transform="rotate(-8,310,130)"/>
+                <rect x="320" y="125" width="165" height="155" rx="8" fill="white"/>
+                <rect x="320" y="125" width="8"   height="155" fill="rgba(0,0,0,.08)"/>
+                <rect x="338" y="148" width="110" height="6"  rx="3" fill="rgba(30,80,150,.25)"/>
+                <rect x="338" y="163" width="110" height="6"  rx="3" fill="rgba(30,80,150,.25)"/>
+                <rect x="338" y="178" width="90"  height="6"  rx="3" fill="rgba(30,80,150,.25)"/>
+                <rect x="338" y="193" width="110" height="6"  rx="3" fill="rgba(30,80,150,.25)"/>
+                <rect x="338" y="208" width="70"  height="6"  rx="3" fill="rgba(30,80,150,.25)"/>
+                <polygon points="400,108 430,140 370,140" fill="rgba(255,255,255,.85)"/>
+                <ellipse cx="400" cy="107" rx="26" ry="10" fill="rgba(255,255,255,.8)"/>`,
+
+        leaf:  `<path d="M400 315 C400 315 270 270 290 145 C330 125 420 130 465 200 C495 245 465 315 400 315Z" fill="rgba(255,255,255,.85)"/>
+                <line x1="400" y1="315" x2="388" y2="148" stroke="rgba(255,255,255,.45)" stroke-width="3"/>
+                <path d="M390 210 Q340 195 330 175" stroke="rgba(255,255,255,.35)" stroke-width="2" fill="none"/>
+                <path d="M395 245 Q355 235 342 210" stroke="rgba(255,255,255,.35)" stroke-width="2" fill="none"/>
+                <circle cx="540" cy="190" r="55" fill="rgba(255,255,255,.12)"/>
+                <path d="M520 175 C540 155 565 160 565 180 C565 200 545 220 520 230 C520 230 510 205 520 175Z" fill="rgba(255,255,255,.5)"/>`,
+
+        shield:`<path d="M400 120 L475 152 L475 220 C475 268 400 305 400 305 C400 305 325 268 325 220 L325 152 Z" fill="rgba(255,255,255,.88)"/>
+                <polyline points="370,210 392,232 435,183" stroke="#E53935" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`,
+
+        building:`<rect x="330" y="125" width="140" height="190" fill="rgba(255,255,255,.85)" rx="4"/>
+                  <rect x="380" y="240" width="40" height="75" fill="rgba(30,80,150,.4)" rx="3"/>
+                  <rect x="345" y="140" width="24" height="22" rx="3" fill="rgba(30,80,150,.4)"/>
+                  <rect x="381" y="140" width="24" height="22" rx="3" fill="rgba(30,80,150,.4)"/>
+                  <rect x="417" y="140" width="24" height="22" rx="3" fill="rgba(30,80,150,.4)"/>
+                  <rect x="345" y="175" width="24" height="22" rx="3" fill="rgba(30,80,150,.4)"/>
+                  <rect x="381" y="175" width="24" height="22" rx="3" fill="rgba(30,80,150,.4)"/>
+                  <rect x="417" y="175" width="24" height="22" rx="3" fill="rgba(30,80,150,.4)"/>
+                  <rect x="345" y="210" width="24" height="22" rx="3" fill="rgba(30,80,150,.4)"/>
+                  <rect x="417" y="210" width="24" height="22" rx="3" fill="rgba(30,80,150,.4)"/>
+                  <polygon points="320,125 400,80 480,125" fill="rgba(255,255,255,.6)"/>`,
+
+        trophy:`<path d="M355 120 L355 210 C355 245 400 265 400 265 C400 265 445 245 445 210 L445 120 Z" fill="rgba(255,255,255,.88)"/>
+                <rect x="280" y="118" width="60" height="14" rx="6" fill="rgba(255,255,255,.6)"/>
+                <path d="M280 132 C270 132 255 145 255 165 C255 190 278 205 310 200" stroke="rgba(255,255,255,.65)" stroke-width="12" fill="none" stroke-linecap="round"/>
+                <rect x="460" y="118" width="60" height="14" rx="6" fill="rgba(255,255,255,.6)"/>
+                <path d="M520 132 C530 132 545 145 545 165 C545 190 522 205 490 200" stroke="rgba(255,255,255,.65)" stroke-width="12" fill="none" stroke-linecap="round"/>
+                <rect x="378" y="265" width="44" height="18" rx="6" fill="rgba(255,255,255,.6)"/>
+                <rect x="358" y="283" width="84" height="16" rx="6" fill="rgba(255,255,255,.75)"/>
+                <polygon points="400,143 407,163 430,163 412,175 419,195 400,183 381,195 388,175 370,163 393,163" fill="rgba(255,200,50,.9)"/>`
+    };
+
+    // ── Imágenes de prueba asignadas a cada artículo ──
+    const ET_IMGS = {
+        bien1: svgImg('#1B5E20','#4CAF50', IC.heart,    'Bienestar Laboral 2026',          'Nuevos beneficios para colaboradores'),
+        bien2: svgImg('#2E7D32','#81C784', IC.trophy,   'Plan de Bienestar Integral',      'Jornadas flexibles y salud mental'),
+        bien2b: svgImg('#388E3C','#A5D6A7', `<text x="400" y="215" font-size="120" text-anchor="middle" font-family="serif" fill="rgba(255,255,255,.85)">🧘</text>`,
+                       'Actividades de bienestar',       'Yoga, meditación y deporte'),
+
+        res1: svgImg('#E65100','#FF9800', IC.chart,    'Resultados Q1 · 2026',            'Crecimiento superior al objetivo'),
+        res2: svgImg('#BF360C','#FF7043', IC.trophy,   '¡Metas superadas!',               'Salud Animal +18 % · Nutrición +12 %'),
+
+        cap1: svgImg('#0D47A1','#42A5F5', IC.book,     'Capacitación Q2 · 2026',          'Bioseguridad y nutrición animal'),
+        cap2: svgImg('#1565C0','#64B5F6', IC.building, 'Sede Girón — Auditorio principal', 'Presencial y virtual disponible'),
+        cap3: svgImg('#283593','#7986CB', `<rect x="320" y="138" width="160" height="120" rx="10" fill="rgba(255,255,255,.88)"/>
+                     <text x="400" y="190" font-size="32" font-family="'Segoe UI',Arial" fill="#283593" font-weight="700" text-anchor="middle">CERT</text>
+                     <text x="400" y="220" font-size="14" font-family="Arial" fill="#546E7A" text-anchor="middle">Insumma Business Group</text>
+                     <line x1="345" y1="238" x2="455" y2="238" stroke="rgba(255,255,255,.5)" stroke-width="2"/>`,
+                     'Certificación interna', 'Válida para toda la organización'),
+
+        rec1: svgImg('#00695C','#26A69A', IC.leaf,     'Programa de Reciclaje — Fase II', 'Gestión ambiental en todas las sedes'),
+        rec2: svgImg('#1B5E20','#66BB6A', `<circle cx="400" cy="195" r="80" fill="rgba(255,255,255,.15)"/>
+                     <path d="M400 155 A40 40 0 0 1 440 195" stroke="white" stroke-width="14" fill="none" stroke-linecap="round"/>
+                     <polygon points="440,170 455,200 425,200" fill="white"/>
+                     <path d="M440 195 A40 40 0 0 1 380 228" stroke="white" stroke-width="14" fill="none" stroke-linecap="round"/>
+                     <polygon points="365,215 360,248 392,240" fill="white"/>
+                     <path d="M380 228 A40 40 0 0 1 400 155" stroke="white" stroke-width="14" fill="none" stroke-linecap="round"/>
+                     <polygon points="395,132 416,152 380,158" fill="white"/>`,
+                     'Reciclar es responsabilidad de todos', 'Únete al programa ambiental IBG'),
+
+        seg1: svgImg('#B71C1C','#F44336', IC.shield,   'Seguridad Industrial',            'Protocolo actualizado 2026'),
+        seg2: svgImg('#880E4F','#EC407A', `<text x="400" y="220" font-size="110" text-anchor="middle" font-family="serif" fill="rgba(255,255,255,.85)">⚠️</text>`,
+                     'Nuevas normas de EPP',               'Uso obligatorio en áreas de producción'),
+
+        reu1: svgImg('#1A237E','#3949AB', IC.building, 'Reunión de Junta Directiva',      'Junio 2026 — Girón, Santander'),
+        reu2: svgImg('#37474F','#78909C', IC.trophy,   'Resultados y proyecciones 2026',  'Informe presentado a la junta'),
+
+        prod1: svgImg('#4A148C','#9C27B0', `<ellipse cx="400" cy="195" rx="90" ry="60" fill="rgba(255,255,255,.85)"/>
+                      <text x="400" y="205" font-size="28" font-weight="700" text-anchor="middle" font-family="'Segoe UI',Arial" fill="#4A148C">NUEVO</text>`,
+                      'Lanzamiento línea Proteínas Max',  'Nutrición animal de alta performance'),
+        prod2: svgImg('#6A1B9A','#CE93D8', IC.chart,   'Proyección de ventas 2026',       'Línea premium en expansión')
+    };
+
+    // ── Datos de artículos ──
+    const ET_NOTICIAS = [
+        {
+            id: 1, type: 'noticias',
+            tag: 'Corporativo', tagBg: '#E8F5E9', tagColor: '#2E7D32',
+            title: 'Nueva política de bienestar laboral 2026',
+            excerpt: 'Conoce los cambios en los beneficios para todos los colaboradores. Se implementan nuevas jornadas flexibles y apoyo en salud mental.',
+            date: 'Hace 2 horas', author: 'Recursos Humanos',
+            imgs: ['bien1','bien2','bien2b'],
+            body: `<p><strong>Insumma Business Group</strong> anuncia una renovación integral de su política de bienestar laboral, efectiva a partir del 1 de julio de 2026. Esta iniciativa responde a la encuesta de clima organizacional realizada en marzo, donde el 78 % de los colaboradores expresó su interés en mayor flexibilidad.</p>
+                   <p><strong>Principales cambios:</strong></p>
+                   <p>🕐 <strong>Jornadas flexibles</strong> — Posibilidad de iniciar la jornada entre 7:00 a.m. y 9:00 a.m. según acuerdo con el jefe inmediato.</p>
+                   <p>🧠 <strong>Apoyo en salud mental</strong> — Tres sesiones gratuitas al año con psicólogo externo, completamente confidenciales.</p>
+                   <p>🏃 <strong>Programa deportivo</strong> — Convenio con Bodytech Girón para colaboradores y un familiar, con descuento del 40 %.</p>
+                   <p>Para mayor información comunícate con el área de Gestión Humana a la extensión 102 o escribe a bienestar@insumma.co</p>`
+        },
+        {
+            id: 2, type: 'noticias',
+            tag: 'Resultados', tagBg: '#FFF3E0', tagColor: '#E65100',
+            title: 'Q1 2026 — Superamos la meta comercial en todas las unidades',
+            excerpt: 'Salud Animal creció 18 % y Nutrición Animal 12 %. Gracias a todo el equipo por el esfuerzo y dedicación.',
+            date: 'Ayer', author: 'Gerencia General',
+            imgs: ['res1','res2'],
+            body: `<p>Con gran orgullo la Gerencia General comparte que el primer trimestre de 2026 cerró con resultados históricos para <strong>Insumma Business Group S.A.</strong></p>
+                   <p>📈 <strong>Unidad Salud Animal:</strong> Crecimiento del 18 % frente al Q1 2025, superando la meta en 6 puntos porcentuales.</p>
+                   <p>📈 <strong>Unidad Nutrición Animal:</strong> Crecimiento del 12 %, con un incremento notable en el segmento de aves de postura.</p>
+                   <p>📦 <strong>Logística:</strong> Cumplimiento del 97 % en los tiempos de entrega, el mejor indicador de los últimos tres años.</p>
+                   <p>Estos resultados son el reflejo del trabajo comprometido de cada uno de los 180 colaboradores del grupo. <strong>¡Gracias por hacer posible este logro!</strong></p>
+                   <p>La celebración oficial se realizará el 4 de julio en las instalaciones de la sede principal de Girón.</p>`
+        },
+        {
+            id: 3, type: 'noticias',
+            tag: 'Formación', tagBg: '#E3F2FD', tagColor: '#1565C0',
+            title: 'Inscripciones abiertas — Programa de Capacitación Q2 2026',
+            excerpt: 'Bioseguridad, nutrición animal y habilidades blandas. Cupos limitados. Modalidad presencial y virtual.',
+            date: 'Hace 2 días', author: 'Gestión Humana',
+            imgs: ['cap1','cap2','cap3'],
+            body: `<p>El área de <strong>Gestión Humana</strong> pone a disposición de todos los colaboradores el catálogo de formación del segundo trimestre. Las inscripciones estarán abiertas del 25 de junio al 10 de julio.</p>
+                   <p><strong>Módulos disponibles:</strong></p>
+                   <p>🔬 <strong>Bioseguridad avanzada</strong> (16 horas) — Presencial en sede Girón. Obligatorio para personal de producción y campo.</p>
+                   <p>🐄 <strong>Nutrición animal aplicada</strong> (12 horas) — Virtual en vivo. Para asesores técnicos y ventas.</p>
+                   <p>🤝 <strong>Comunicación asertiva</strong> (8 horas) — Virtual asincrónica. Disponible para todos los cargos.</p>
+                   <p>💼 <strong>Excel para gestión comercial</strong> (10 horas) — Virtual en vivo. Cupos: 20 personas.</p>
+                   <p>Inscríbete en el portal de formación o comunícate con Gestión Humana a la ext. 104. <strong>Los cupos son limitados.</strong></p>`
+        },
+        {
+            id: 4, type: 'noticias',
+            tag: 'Sostenibilidad', tagBg: '#E0F2F1', tagColor: '#00695C',
+            title: 'Segunda fase del programa de reciclaje e impacto ambiental',
+            excerpt: 'Iniciamos la fase II del programa de gestión ambiental en todas las instalaciones. Participa y marca la diferencia.',
+            date: 'Hace 3 días', author: 'HSEQ',
+            imgs: ['rec1','rec2'],
+            body: `<p>El área de <strong>HSEQ</strong> anuncia el inicio de la segunda fase del Programa de Gestión Ambiental IBG, tras los exitosos resultados de la fase inicial que permitió reducir un 23 % la generación de residuos sólidos en 2025.</p>
+                   <p><strong>Metas de la Fase II:</strong></p>
+                   <p>♻️ <strong>Reciclaje de empaques</strong> — Instalación de puntos ecológicos en todas las áreas de trabajo con clasificación por color.</p>
+                   <p>💧 <strong>Ahorro de agua</strong> — Meta de reducción del 15 % en consumo mensual. Se instalan medidores por área.</p>
+                   <p>⚡ <strong>Eficiencia energética</strong> — Cambio progresivo a iluminación LED en bodegas y áreas administrativas.</p>
+                   <p>🌳 <strong>Siembra de árboles</strong> — Jornada de reforestación programada para el 22 de agosto en la vereda El Páramo.</p>
+                   <p>El cumplimiento de las metas ambientales hace parte de la evaluación de desempeño departamental del segundo semestre.</p>`
+        }
+    ];
+
+    const ET_COMUNICADOS = [
+        {
+            id: 10, type: 'comunicados',
+            tag: 'Seguridad', tagBg: '#FFEBEE', tagColor: '#C62828',
+            title: 'Actualización del protocolo de seguridad industrial — Uso de EPP',
+            excerpt: 'A partir del 1 de julio es obligatorio el uso de casco y guantes en toda el área de producción, sin excepciones.',
+            date: 'Hace 4 horas', author: 'HSEQ · Jefe de Seguridad',
+            imgs: ['seg1','seg2'],
+            body: `<p><strong>COMUNICADO OFICIAL — HSEQ</strong></p>
+                   <p>Se informa a todos los colaboradores y contratistas que a partir del <strong>1 de julio de 2026</strong> entran en vigencia las modificaciones al Protocolo de Seguridad Industrial N.° PSI-2026-02, en cumplimiento de la Resolución 0312 del Ministerio del Trabajo.</p>
+                   <p><strong>Cambios obligatorios:</strong></p>
+                   <p>🦺 <strong>Área de producción y bodegas:</strong> Casco tipo I, chaleco reflectivo, guantes de nitrilo y botas con punta de acero. Uso permanente durante el turno.</p>
+                   <p>🥽 <strong>Área de laboratorio:</strong> Monogafas de seguridad, bata anti-fluidos y mascarilla N95. Obligatorio al manipular cualquier reactivo.</p>
+                   <p>🚧 <strong>Visitas y contratistas:</strong> Deben portar EPP propio o solicitarlo en recepción antes de ingresar al área operativa.</p>
+                   <p>El incumplimiento de estas disposiciones será causal de llamado de atención según el Reglamento Interno de Trabajo. Para solicitar dotación comuníquese con el almacén en la ext. 118.</p>`
+        },
+        {
+            id: 11, type: 'comunicados',
+            tag: 'Institucional', tagBg: '#E8EAF6', tagColor: '#283593',
+            title: 'Convocatoria — Reunión de Junta Directiva · Julio 2026',
+            excerpt: 'Se convoca a todos los miembros de la junta directiva y gerentes de unidad a la sesión ordinaria del mes de julio.',
+            date: 'Hace 1 día', author: 'Secretaría General',
+            imgs: ['reu1','reu2'],
+            body: `<p><strong>CONVOCATORIA FORMAL</strong></p>
+                   <p>La Secretaría General de <strong>Insumma Business Group S.A.</strong> convoca a los miembros de la Junta Directiva, Gerentes de Unidad y Directores de Área a la sesión ordinaria correspondiente al mes de julio de 2026.</p>
+                   <p>📅 <strong>Fecha:</strong> Viernes 11 de julio de 2026<br>
+                   🕘 <strong>Hora:</strong> 9:00 a.m. — 12:00 m.<br>
+                   📍 <strong>Lugar:</strong> Sala de juntas principal, Sede Girón (piso 2)<br>
+                   📡 <strong>Enlace virtual:</strong> Se enviará por correo institucional</p>
+                   <p><strong>Orden del día:</strong></p>
+                   <p>1. Verificación de quórum y apertura<br>
+                   2. Lectura y aprobación del acta anterior<br>
+                   3. Informe de resultados Q1 y Q2-2026<br>
+                   4. Proyección presupuestal segundo semestre<br>
+                   5. Aprobación de nuevas líneas de producto<br>
+                   6. Proposiciones y varios</p>
+                   <p>Confirmar asistencia antes del <strong>9 de julio</strong> al correo junta@insumma.co</p>`
+        },
+        {
+            id: 12, type: 'comunicados',
+            tag: 'Comercial', tagBg: '#F3E5F5', tagColor: '#6A1B9A',
+            title: 'Lanzamiento oficial — Línea Proteínas Max 2026',
+            excerpt: 'Presentamos nuestra nueva línea premium de nutrición animal de alta performance. Disponible desde agosto 2026.',
+            date: 'Hace 2 días', author: 'Dirección Comercial',
+            imgs: ['prod1','prod2'],
+            body: `<p><strong>Estimados colaboradores,</strong></p>
+                   <p>La Dirección Comercial se complace en anunciar el lanzamiento de <strong>Proteínas Max</strong>, la nueva línea premium de nutrición animal de Insumma Business Group, desarrollada durante 18 meses de investigación y validación de campo.</p>
+                   <p><strong>Características del producto:</strong></p>
+                   <p>🥩 Concentrado proteico de alta digestibilidad (≥ 68 % PB)<br>
+                   🐔 Formulado para aves, porcinos y bovinos de alta producción<br>
+                   📦 Presentaciones: 40 kg, 50 kg y big bag 1.000 kg<br>
+                   🌡️ Estabilidad térmica garantizada hasta 85°C</p>
+                   <p><strong>Capacitación al equipo comercial:</strong><br>
+                   📅 Julio 18 — Virtual (link por correo)<br>
+                   📅 Julio 25 — Presencial, sede Girón</p>
+                   <p>Los precios de lanzamiento y materiales de ventas estarán disponibles en SICREO 2.0 a partir del 15 de julio. Cualquier consulta dirigirla a comercial@insumma.co</p>`
+        }
+    ];
+
+    // ── Renderizado de tarjetas ──
+    function renderEtCards(items, gridId) {
+        const el = document.getElementById(gridId);
+        if (!el) return;
+        el.innerHTML = items.map(art => {
+            const imgs = art.imgs.map(k => ET_IMGS[k]);
+            const cover = imgs[0] || '';
+            const extras = imgs.slice(1, 3);
+            const moreCount = imgs.length > 3 ? imgs.length - 3 : 0;
+
+            const thumbs = extras.map((src, i) =>
+                `<img class="et-thumb" src="${src}" alt="" onclick="event.stopPropagation();etOpenArticle('${art.type}',${art.id},${i+1})">`
+            ).join('');
+            const moreBadge = moreCount > 0 ? `<div class="et-more-badge">+${moreCount}</div>` : '';
+
+            return `<div class="et-card" onclick="etOpenArticle('${art.type}',${art.id},0)">
+                <div class="et-card-cover">
+                    <img src="${cover}" alt="${art.title}" loading="lazy"/>
+                    ${extras.length ? `<div class="et-thumb-strip">${thumbs}${moreBadge}</div>` : ''}
+                </div>
+                <div class="et-card-body">
+                    <span class="et-card-tag" style="background:${art.tagBg};color:${art.tagColor};">${art.tag}</span>
+                    <div class="et-card-title">${art.title}</div>
+                    <div class="et-card-desc">${art.excerpt}</div>
+                    <div class="et-card-meta">
+                        <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        ${art.date} &middot; ${art.author}
+                    </div>
+                    <span class="et-read-more">
+                        Leer más
+                        <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                    </span>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    function etTab(name) {
+        document.querySelectorAll('.et-tab').forEach(t => t.classList.remove('active'));
+        document.getElementById('et-tab-' + name).classList.add('active');
+        document.getElementById('et-noticias-wrap').style.display    = name === 'noticias'    ? '' : 'none';
+        document.getElementById('et-comunicados-wrap').style.display = name === 'comunicados' ? '' : 'none';
+    }
+
+    // ── Modal ──
+    let _etArticle = null;
+    let _etImgIdx  = 0;
+
+    function etOpenArticle(type, id, imgIdx) {
+        const list = type === 'noticias' ? ET_NOTICIAS : ET_COMUNICADOS;
+        _etArticle = list.find(a => a.id === id);
+        if (!_etArticle) return;
+        _etImgIdx = imgIdx || 0;
+        _etRenderModal();
+        document.getElementById('et-overlay').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function _etRenderModal() {
+        const art  = _etArticle;
+        const imgs = art.imgs.map(k => ET_IMGS[k]);
+        const n    = imgs.length;
+
+        // Imagen principal
+        document.getElementById('et-gal-img').src     = imgs[_etImgIdx] || '';
+        document.getElementById('et-gal-counter').textContent = `${_etImgIdx + 1} / ${n}`;
+
+        // Flechas
+        document.getElementById('et-gal-prev').style.display = n > 1 ? 'flex' : 'none';
+        document.getElementById('et-gal-next').style.display = n > 1 ? 'flex' : 'none';
+
+        // Dots
+        document.getElementById('et-gal-dots').innerHTML = imgs.map((_, i) =>
+            `<div class="et-gal-dot${i === _etImgIdx ? ' active' : ''}" onclick="etGoImg(${i})"></div>`
+        ).join('');
+
+        // Texto
+        document.getElementById('et-mb-tag').textContent        = art.tag;
+        document.getElementById('et-mb-tag').style.background   = art.tagBg;
+        document.getElementById('et-mb-tag').style.color        = art.tagColor;
+        document.getElementById('et-mb-title').textContent      = art.title;
+        document.getElementById('et-mb-meta').innerHTML =
+            `<span>🕐 ${art.date}</span><span>✍️ ${art.author}</span>`;
+        document.getElementById('et-mb-text').innerHTML = art.body;
+
+        // Miniaturas
+        document.getElementById('et-modal-thumbs').innerHTML = imgs.map((src, i) =>
+            `<button class="et-modal-thumb-btn${i === _etImgIdx ? ' active' : ''}" onclick="etGoImg(${i})">
+                <img src="${src}" alt="Imagen ${i+1}"/>
+             </button>`
+        ).join('');
+    }
+
+    function etNavImg(dir) {
+        const n = _etArticle.imgs.length;
+        _etImgIdx = (_etImgIdx + dir + n) % n;
+        _etRenderModal();
+        document.getElementById('et-modal-body').scrollTo({ top: 0 });
+    }
+
+    function etGoImg(idx) {
+        _etImgIdx = idx;
+        _etRenderModal();
+    }
+
+    function etClose() {
+        document.getElementById('et-overlay').style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    function etCloseOnBg(e) {
+        if (e.target === document.getElementById('et-overlay')) etClose();
+    }
+
+    // Cerrar con Escape
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') etClose(); });
+
+    // Inicializar grids al cargar
+    renderEtCards(ET_NOTICIAS,    'et-noticias-grid');
+    renderEtCards(ET_COMUNICADOS, 'et-comunicados-grid');
+
 </script>
+
+
+<!-- ══ MODAL ENTÉRATE ══ -->
+<div id="et-overlay" class="et-overlay" style="display:none;" onclick="etCloseOnBg(event)">
+    <div class="et-modal" id="et-modal">
+        <!-- Galería de imágenes -->
+        <div class="et-modal-gallery" id="et-gal">
+            <img id="et-gal-img" src="" alt="Imagen del artículo"/>
+            <button class="et-modal-close" onclick="etClose()" title="Cerrar">&#10005;</button>
+            <button class="et-gal-btn et-gal-prev" id="et-gal-prev" onclick="etNavImg(-1)">&#8249;</button>
+            <button class="et-gal-btn et-gal-next" id="et-gal-next" onclick="etNavImg(1)">&#8250;</button>
+            <div class="et-gal-counter" id="et-gal-counter">1 / 1</div>
+            <div class="et-gal-dots" id="et-gal-dots"></div>
+        </div>
+        <!-- Cuerpo del artículo -->
+        <div class="et-modal-body" id="et-modal-body">
+            <span class="et-card-tag" id="et-mb-tag"></span>
+            <h2 id="et-mb-title"></h2>
+            <div class="et-mb-meta" id="et-mb-meta"></div>
+            <div class="et-mb-text" id="et-mb-text"></div>
+            <!-- Miniaturas de imágenes -->
+            <div class="et-modal-thumbs" id="et-modal-thumbs"></div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
