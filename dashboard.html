@@ -589,6 +589,7 @@
             .welcome-date .wrest { text-align: left; }
             .quick-grid { grid-template-columns: repeat(3,1fr); }
             .content-area { padding: 16px; }
+            .sm-main-grid { grid-template-columns: 1fr !important; }
         }
     </style>
 </head>
@@ -912,12 +913,100 @@
 
         <!-- ══ SÚMATE ══ -->
         <section class="section" id="sec-sumate">
-            <div class="page-title"><h2>Súmate</h2><p>Iniciativas, voluntariados y programas en los que puedes participar</p></div>
-            <div class="section-grid">
-                <div class="sec-card"><span class="sc-tag" style="background:#E8F5E9;color:#2E7D32;">Voluntariado</span><div class="sc-title">Jornada de salud rural — Julio 2026</div><div class="sc-desc">Acompáñanos en la jornada para pequeños productores de Girón y Lebrija. Se necesitan 12 voluntarios. Actualmente 8 inscritos.</div><div class="sc-footer" style="margin-bottom:12px;">Cupos: 8/12 inscritos</div><button class="btn-primary" style="font-size:13px;padding:8px 18px;">Inscribirme</button></div>
-                <div class="sec-card"><span class="sc-tag" style="background:#FFF3E0;color:#F57C00;">Club</span><div class="sc-title">Club deportivo IBG — Temporada 2026</div><div class="sc-desc">Fútbol, ciclismo y running. Entrenos miércoles y sábados. Abierto a todos los colaboradores y familias.</div><div class="sc-footer" style="margin-bottom:12px;">34 participantes activos</div><button class="btn-primary" style="font-size:13px;padding:8px 18px;">Unirme</button></div>
-                <div class="sec-card"><span class="sc-tag" style="background:#E3F2FD;color:#1565C0;">Comité</span><div class="sc-title">Comité de Bienestar — Convocatoria</div><div class="sc-desc">3 cupos para el comité de bienestar laboral 2026-2027. Participa en la planeación de actividades para todos.</div><div class="sc-footer" style="margin-bottom:12px;">Cierre: 30 jun 2026</div><button class="btn-secondary" style="font-size:13px;padding:8px 18px;">Postularme</button></div>
+
+            <div class="page-title" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+                <div>
+                    <h2>Súmate — Liga de Retos IBG</h2>
+                    <p>Completa retos, acumula puntos y gana premios. ¡Cada acción cuenta!</p>
+                </div>
+                <div style="display:flex;gap:8px;">
+                    <span style="background:#E8F5E9;color:#2E7D32;font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;border:1px solid #C8E6C9;">⏱ Liga activa · Jun 2026</span>
+                </div>
             </div>
+
+            <!-- Mis stats personales -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-bottom:24px;" id="sm-stats-row">
+                <div style="background:#fff;border:1px solid #E0E7EF;border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:4px;">
+                    <span style="font-size:11px;font-weight:600;color:#90A4AE;text-transform:uppercase;letter-spacing:.8px;">Mi posición</span>
+                    <span style="font-size:30px;font-weight:800;color:#2E7D32;" id="sm-rank">#7</span>
+                    <span style="font-size:12px;color:#546E7A;">de 8 participantes</span>
+                </div>
+                <div style="background:#fff;border:1px solid #E0E7EF;border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:4px;">
+                    <span style="font-size:11px;font-weight:600;color:#90A4AE;text-transform:uppercase;letter-spacing:.8px;">Mis puntos</span>
+                    <span style="font-size:30px;font-weight:800;color:#F57C00;" id="sm-pts">480</span>
+                    <span style="font-size:12px;color:#546E7A;">+120 pts esta semana</span>
+                </div>
+                <div style="background:#fff;border:1px solid #E0E7EF;border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:4px;">
+                    <span style="font-size:11px;font-weight:600;color:#90A4AE;text-transform:uppercase;letter-spacing:.8px;">Retos completados</span>
+                    <span style="font-size:30px;font-weight:800;color:#1565C0;">4</span>
+                    <span style="font-size:12px;color:#546E7A;">de 9 disponibles</span>
+                </div>
+                <div style="background:#fff;border:1px solid #E0E7EF;border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:4px;">
+                    <span style="font-size:11px;font-weight:600;color:#90A4AE;text-transform:uppercase;letter-spacing:.8px;">Próximo premio</span>
+                    <span style="font-size:15px;font-weight:700;color:#1C2B2D;">Bono bienestar</span>
+                    <span style="font-size:12px;color:#F57C00;font-weight:600;">Faltan 320 pts</span>
+                </div>
+            </div>
+
+            <!-- Progreso hacia el siguiente premio -->
+            <div style="background:#fff;border:1px solid #E0E7EF;border-radius:12px;padding:18px 22px;margin-bottom:24px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                    <span style="font-size:13px;font-weight:700;color:#1C2B2D;">🎯 Progreso hacia: Bono de bienestar</span>
+                    <span style="font-size:12px;color:#546E7A;">480 / 800 pts</span>
+                </div>
+                <div style="background:#F0F2F5;border-radius:20px;height:12px;overflow:hidden;">
+                    <div style="width:60%;height:100%;background:linear-gradient(90deg,#2E7D32,#66BB6A);border-radius:20px;transition:width .6s ease;"></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;margin-top:6px;">
+                    <span style="font-size:11px;color:#90A4AE;">0 pts</span>
+                    <span style="font-size:11px;color:#90A4AE;">800 pts</span>
+                </div>
+            </div>
+
+            <!-- Gráfico + Tabla de posiciones -->
+            <div style="display:grid;grid-template-columns:1fr 300px;gap:20px;margin-bottom:24px;" class="sm-main-grid">
+
+                <!-- Gráfico de barras -->
+                <div style="background:#fff;border:1px solid #E0E7EF;border-radius:12px;overflow:hidden;">
+                    <div style="padding:16px 20px;border-bottom:1px solid #E0E7EF;display:flex;align-items:center;justify-content:space-between;">
+                        <h3 style="font-size:14px;font-weight:700;color:#1C2B2D;">📊 Puntos por colaborador</h3>
+                        <div style="display:flex;gap:6px;">
+                            <button onclick="setChartView('bar')" id="btnBar" style="padding:5px 12px;border-radius:6px;border:1.5px solid #2E7D32;background:#E8F5E9;color:#2E7D32;font-size:11px;font-weight:700;cursor:pointer;">Barras</button>
+                            <button onclick="setChartView('line')" id="btnLine" style="padding:5px 12px;border-radius:6px;border:1.5px solid #E0E7EF;background:#fff;color:#546E7A;font-size:11px;font-weight:700;cursor:pointer;">Línea</button>
+                        </div>
+                    </div>
+                    <div style="padding:20px;">
+                        <canvas id="smChart" height="280" style="width:100%;display:block;"></canvas>
+                    </div>
+                </div>
+
+                <!-- Tabla de posiciones -->
+                <div style="background:#fff;border:1px solid #E0E7EF;border-radius:12px;overflow:hidden;">
+                    <div style="padding:16px 20px;border-bottom:1px solid #E0E7EF;">
+                        <h3 style="font-size:14px;font-weight:700;color:#1C2B2D;">🏆 Tabla de posiciones</h3>
+                    </div>
+                    <div id="sm-leaderboard"></div>
+                </div>
+            </div>
+
+            <!-- Retos activos -->
+            <div style="margin-bottom:24px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                    <h3 style="font-size:16px;font-weight:700;color:#1C2B2D;">⚡ Retos activos</h3>
+                    <span style="font-size:12px;color:#546E7A;">Cierre de liga: 31 Jul 2026</span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;" id="sm-challenges"></div>
+            </div>
+
+            <!-- Catálogo de premios -->
+            <div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                    <h3 style="font-size:16px;font-weight:700;color:#1C2B2D;">🎁 Catálogo de premios</h3>
+                    <span style="font-size:12px;color:#546E7A;">Tus puntos actuales: <strong style="color:#F57C00;">480 pts</strong></span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;" id="sm-prizes"></div>
+            </div>
+
         </section>
 
         <!-- ══ DIRECTORIO ══ -->
@@ -1160,6 +1249,309 @@
 
     document.getElementById('nextMonth').addEventListener('click', () => {
         calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } buildCalendar();
+    });
+
+    // ════════════════════════════════════════
+    //  SÚMATE — Sistema de puntos / Liga IBG
+    // ════════════════════════════════════════
+
+    // Datos de colaboradores (en producción vendrían de la BD)
+    const SM_PLAYERS = [
+        { name: 'Laura Peña',      initials: 'LP', color: '#2E7D32', pts: 1240, retos: 8, area: 'Bioseguridad' },
+        { name: 'Jorge Morales',   initials: 'JM', color: '#00695C', pts: 980,  retos: 7, area: 'Comercial' },
+        { name: 'María Castro',    initials: 'MC', color: '#F57C00', pts: 875,  retos: 6, area: 'Nutrición' },
+        { name: 'Roberto Pardo',   initials: 'RP', color: '#1565C0', pts: 720,  retos: 5, area: 'Metalmecánica' },
+        { name: 'Andrea Gómez',    initials: 'AG', color: '#6A1B9A', pts: 650,  retos: 5, area: 'Salud Animal' },
+        { name: 'Sandra Ruiz',     initials: 'SR', color: '#C62828', pts: 590,  retos: 4, area: 'Gestión Humana' },
+        { name: 'Juan Díaz',       initials: 'JD', color: '#388E3C', pts: 480,  retos: 4, area: 'Comercial' },
+        { name: 'Carlos Vargas',   initials: 'CV', color: '#37474F', pts: 310,  retos: 2, area: 'Producción' }
+    ];
+
+    const SM_CHALLENGES = [
+        { id: 1, title: 'Capacitación bioseguridad Q2',    pts: 150, cat: 'Formación',    color: '#2E7D32', bg: '#E8F5E9', deadline: '4 Jul 2026',  desc: 'Completa el módulo virtual y aprueba la evaluación con mínimo 80%.',           done: false },
+        { id: 2, title: 'Jornada de salud rural',          pts: 200, cat: 'Voluntariado', color: '#F57C00', bg: '#FFF3E0', deadline: '15 Jul 2026', desc: 'Participa activamente en la jornada de salud animal en Girón.',               done: false },
+        { id: 3, title: 'Proponer 3 ideas al buzón',       pts: 100, cat: 'Innovación',   color: '#1565C0', bg: '#E3F2FD', deadline: '31 Jul 2026', desc: 'Envía 3 ideas al Buzón de Ideas. Cada una debe ser de categoría diferente.',  done: false },
+        { id: 4, title: 'Unirte al club deportivo IBG',    pts:  75, cat: 'Bienestar',    color: '#00695C', bg: '#E0F2F1', deadline: '30 Jun 2026', desc: 'Inscríbete y asiste a tu primera sesión del club deportivo IBG.',             done: false },
+        { id: 5, title: 'Asistir a 2 foros del mes',      pts: 120, cat: 'Comunidad',    color: '#6A1B9A', bg: '#EDE7F6', deadline: '31 Jul 2026', desc: 'Participa con al menos un comentario en 2 hilos del foro corporativo.',       done: false },
+        { id: 6, title: 'Completar evaluación desempeño',  pts: 120, cat: 'Gestión',      color: '#2E7D32', bg: '#E8F5E9', deadline: 'Cerrado',      desc: 'Evaluación del primer semestre completada correctamente.',                    done: true  },
+        { id: 7, title: 'Asistir a reunión general Q1',    pts:  80, cat: 'Corporativo',  color: '#1565C0', bg: '#E3F2FD', deadline: 'Cerrado',      desc: 'Asistencia confirmada a la reunión general de resultados Q1.',               done: true  },
+        { id: 8, title: 'Postularse al comité bienestar',  pts:  90, cat: 'Liderazgo',   color: '#F57C00', bg: '#FFF3E0', deadline: '30 Jun 2026', desc: 'Presenta tu postulación al comité de bienestar laboral 2026-2027.',          done: false },
+        { id: 9, title: 'Confirmar asistencia aniversario',pts:  50, cat: 'Social',       color: '#C62828', bg: '#FFEBEE', deadline: '12 Jul 2026', desc: 'Confirma tu asistencia a la celebración del aniversario de IBG.',            done: false }
+    ];
+
+    const SM_PRIZES = [
+        { pts: 500,  icon: '☀️',  title: 'Día libre adicional',    desc: 'Un día de descanso extra al mes de tu elección.',              color: '#2E7D32', bg: '#E8F5E9' },
+        { pts: 800,  icon: '💳',  title: 'Bono de bienestar',      desc: 'Bono por $50.000 COP para bienestar personal o familiar.',    color: '#F57C00', bg: '#FFF3E0' },
+        { pts: 1000, icon: '👕',  title: 'Kit deportivo IBG',      desc: 'Camiseta, pantaloneta y taza oficial Insumma Business Group.', color: '#1565C0', bg: '#E3F2FD' },
+        { pts: 1500, icon: '📚',  title: 'Bono de estudio',        desc: 'Bono por $200.000 COP para cursos, libros o capacitaciones.',  color: '#6A1B9A', bg: '#EDE7F6' },
+        { pts: 2000, icon: '✈️',  title: 'Viaje corporativo',      desc: 'Weekend trip para el colaborador y un acompañante. Destino sorpresa.', color: '#00695C', bg: '#E0F2F1' }
+    ];
+
+    const MY_PTS = 480;
+    const MEDAL  = ['🥇', '🥈', '🥉'];
+
+    // ── Leaderboard ──
+    function buildLeaderboard() {
+        const el = document.getElementById('sm-leaderboard');
+        if (!el) return;
+        const sorted = [...SM_PLAYERS].sort((a, b) => b.pts - a.pts);
+        el.innerHTML = sorted.map((p, i) => {
+            const isMe = p.name === 'Juan Díaz';
+            return `
+            <div style="display:flex;align-items:center;gap:12px;padding:11px 20px;border-bottom:1px solid #E0E7EF;${isMe ? 'background:#F0F4FF;' : ''}">
+                <span style="width:20px;text-align:center;font-size:${i < 3 ? '16px' : '12px'};font-weight:700;color:${i < 3 ? '' : '#90A4AE'};">${i < 3 ? MEDAL[i] : '#' + (i + 1)}</span>
+                <div style="width:32px;height:32px;border-radius:50%;background:${p.color};color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">${p.initials}</div>
+                <div style="flex:1;min-width:0;">
+                    <div style="font-size:13px;font-weight:${isMe ? '700' : '600'};color:#1C2B2D;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}${isMe ? ' <span style="color:#1565C0;font-size:10px;">(tú)</span>' : ''}</div>
+                    <div style="font-size:11px;color:#90A4AE;">${p.area}</div>
+                </div>
+                <span style="font-size:13px;font-weight:800;color:${p.color};flex-shrink:0;">${p.pts.toLocaleString()}</span>
+            </div>`;
+        }).join('');
+    }
+
+    // ── Gráfico de barras / línea con Canvas ──
+    let currentChartView = 'bar';
+    let chartAnim        = null;
+    let animProgress     = 0;
+
+    function setChartView(type) {
+        currentChartView = type;
+        document.getElementById('btnBar').style.cssText  = type === 'bar'  ? 'padding:5px 12px;border-radius:6px;border:1.5px solid #2E7D32;background:#E8F5E9;color:#2E7D32;font-size:11px;font-weight:700;cursor:pointer;' : 'padding:5px 12px;border-radius:6px;border:1.5px solid #E0E7EF;background:#fff;color:#546E7A;font-size:11px;font-weight:700;cursor:pointer;';
+        document.getElementById('btnLine').style.cssText = type === 'line' ? 'padding:5px 12px;border-radius:6px;border:1.5px solid #2E7D32;background:#E8F5E9;color:#2E7D32;font-size:11px;font-weight:700;cursor:pointer;' : 'padding:5px 12px;border-radius:6px;border:1.5px solid #E0E7EF;background:#fff;color:#546E7A;font-size:11px;font-weight:700;cursor:pointer;';
+        animProgress = 0;
+        runChartAnim();
+    }
+
+    function runChartAnim() {
+        if (chartAnim) cancelAnimationFrame(chartAnim);
+        function step() {
+            animProgress = Math.min(animProgress + 0.04, 1);
+            drawChart(animProgress);
+            if (animProgress < 1) chartAnim = requestAnimationFrame(step);
+        }
+        step();
+    }
+
+    function drawChart(prog) {
+        const canvas  = document.getElementById('smChart');
+        if (!canvas) return;
+        const ctx     = canvas.getContext('2d');
+        const sorted  = [...SM_PLAYERS].sort((a, b) => b.pts - a.pts);
+        const dpr     = window.devicePixelRatio || 1;
+        const W       = canvas.clientWidth;
+        const H       = 280;
+
+        canvas.width  = W * dpr;
+        canvas.height = H * dpr;
+        ctx.scale(dpr, dpr);
+        ctx.clearRect(0, 0, W, H);
+
+        const maxPts  = sorted[0].pts;
+        const padL    = 90;
+        const padR    = 50;
+        const padT    = 16;
+        const padB    = 20;
+        const chartW  = W - padL - padR;
+        const chartH  = H - padT - padB;
+
+        if (currentChartView === 'bar') {
+            const rowH   = chartH / sorted.length;
+            const barH   = Math.min(rowH * 0.55, 28);
+
+            // Líneas de cuadrícula verticales
+            ctx.strokeStyle = '#F0F2F5';
+            ctx.lineWidth   = 1;
+            [0.25, 0.5, 0.75, 1].forEach(f => {
+                const x = padL + chartW * f;
+                ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, padT + chartH); ctx.stroke();
+                ctx.fillStyle  = '#B0BEC5';
+                ctx.font       = '10px Segoe UI';
+                ctx.textAlign  = 'center';
+                ctx.fillText(Math.round(maxPts * f), x, padT + chartH + 14);
+            });
+
+            sorted.forEach((p, i) => {
+                const y      = padT + i * rowH + (rowH - barH) / 2;
+                const barW   = (p.pts / maxPts) * chartW * prog;
+                const isMe   = p.name === 'Juan Díaz';
+
+                // Barra
+                const grad = ctx.createLinearGradient(padL, 0, padL + chartW, 0);
+                grad.addColorStop(0, p.color);
+                grad.addColorStop(1, p.color + '99');
+                ctx.fillStyle = isMe ? '#1565C0' : grad;
+                ctx.beginPath();
+                ctx.roundRect(padL, y, Math.max(barW, 4), barH, 5);
+                ctx.fill();
+
+                // Valor al final de la barra
+                if (prog > 0.3) {
+                    ctx.fillStyle = '#1C2B2D';
+                    ctx.font      = `bold 11px Segoe UI`;
+                    ctx.textAlign = 'left';
+                    ctx.fillText(p.pts.toLocaleString() + ' pts', padL + barW + 6, y + barH / 2 + 4);
+                }
+
+                // Nombre (izquierda)
+                ctx.fillStyle  = isMe ? '#1565C0' : '#1C2B2D';
+                ctx.font       = `${isMe ? 'bold ' : ''}11px Segoe UI`;
+                ctx.textAlign  = 'right';
+                const label    = p.name.split(' ')[0];
+                ctx.fillText(label, padL - 6, y + barH / 2 + 4);
+
+                // Medalla si top 3
+                if (i < 3) {
+                    ctx.font      = '13px serif';
+                    ctx.textAlign = 'right';
+                    ctx.fillText(MEDAL[i], padL - 58, y + barH / 2 + 5);
+                }
+            });
+
+        } else {
+            // Gráfico de línea
+            const pts = sorted.slice().reverse();
+            const stepX = chartW / (pts.length - 1);
+
+            // Cuadrícula horizontal
+            ctx.strokeStyle = '#F0F2F5';
+            ctx.lineWidth   = 1;
+            [0.25, 0.5, 0.75, 1].forEach(f => {
+                const y = padT + chartH * (1 - f);
+                ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padL + chartW, y); ctx.stroke();
+                ctx.fillStyle = '#B0BEC5'; ctx.font = '10px Segoe UI'; ctx.textAlign = 'right';
+                ctx.fillText(Math.round(maxPts * f), padL - 4, y + 4);
+            });
+
+            // Área rellena
+            const visLen = Math.floor(pts.length * prog);
+            if (visLen > 1) {
+                const grad = ctx.createLinearGradient(0, padT, 0, padT + chartH);
+                grad.addColorStop(0, 'rgba(46,125,50,0.25)');
+                grad.addColorStop(1, 'rgba(46,125,50,0)');
+                ctx.beginPath();
+                ctx.moveTo(padL, padT + chartH);
+                pts.slice(0, visLen).forEach((p, i) => {
+                    const x = padL + i * stepX;
+                    const y = padT + chartH * (1 - p.pts / maxPts);
+                    i === 0 ? ctx.lineTo(x, y) : ctx.lineTo(x, y);
+                });
+                ctx.lineTo(padL + (visLen - 1) * stepX, padT + chartH);
+                ctx.closePath();
+                ctx.fillStyle = grad;
+                ctx.fill();
+
+                // Línea
+                ctx.beginPath();
+                pts.slice(0, visLen).forEach((p, i) => {
+                    const x = padL + i * stepX;
+                    const y = padT + chartH * (1 - p.pts / maxPts);
+                    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                });
+                ctx.strokeStyle = '#2E7D32'; ctx.lineWidth = 2.5;
+                ctx.lineJoin    = 'round';   ctx.stroke();
+
+                // Puntos
+                pts.slice(0, visLen).forEach((p, i) => {
+                    const x = padL + i * stepX;
+                    const y = padT + chartH * (1 - p.pts / maxPts);
+                    ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color; ctx.fill();
+                    ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+                    ctx.fillStyle  = '#1C2B2D'; ctx.font = '10px Segoe UI'; ctx.textAlign = 'center';
+                    ctx.fillText(p.name.split(' ')[0], x, padT + chartH + 14);
+                });
+            }
+        }
+    }
+
+    // ── Retos ──
+    function buildChallenges() {
+        const el = document.getElementById('sm-challenges');
+        if (!el) return;
+        el.innerHTML = SM_CHALLENGES.map(c => `
+        <div style="background:#fff;border:1.5px solid ${c.done ? '#E0E7EF' : c.bg.replace('F','D')};border-radius:12px;padding:18px;position:relative;opacity:${c.done ? '.75' : '1'};">
+            ${c.done ? '<div style="position:absolute;top:12px;right:12px;background:#E8F5E9;color:#2E7D32;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">✓ Completado</div>' : ''}
+            <span style="background:${c.bg};color:${c.color};font-size:10px;font-weight:700;padding:3px 9px;border-radius:8px;text-transform:uppercase;display:inline-block;margin-bottom:10px;">${c.cat}</span>
+            <div style="font-size:14px;font-weight:700;color:#1C2B2D;margin-bottom:6px;">${c.title}</div>
+            <div style="font-size:12.5px;color:#546E7A;line-height:1.55;margin-bottom:12px;">${c.desc}</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+                <div style="display:flex;align-items:center;gap:6px;">
+                    <span style="font-size:20px;font-weight:800;color:${c.color};">+${c.pts}</span>
+                    <span style="font-size:11px;color:#90A4AE;font-weight:600;">puntos</span>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+                    <span style="font-size:11px;color:#90A4AE;">📅 ${c.deadline}</span>
+                    ${!c.done ? `<button onclick="completeChallenge(${c.id})" style="padding:7px 14px;background:${c.color};color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;margin-top:4px;">Participar</button>` : ''}
+                </div>
+            </div>
+        </div>`).join('');
+    }
+
+    function completeChallenge(id) {
+        const c = SM_CHALLENGES.find(x => x.id === id);
+        if (!c || c.done) return;
+        c.done = true;
+        buildChallenges();
+        // Toast de confirmación
+        const toast = document.createElement('div');
+        toast.textContent = `✅ ¡Reto registrado! +${c.pts} puntos en camino`;
+        toast.style.cssText = 'position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#2E7D32;color:#fff;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:600;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.18);';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+
+    // ── Premios ──
+    function buildPrizes() {
+        const el = document.getElementById('sm-prizes');
+        if (!el) return;
+        el.innerHTML = SM_PRIZES.map(p => {
+            const unlocked = MY_PTS >= p.pts;
+            return `
+            <div style="background:#fff;border:1.5px solid ${unlocked ? p.color : '#E0E7EF'};border-radius:12px;padding:20px;text-align:center;position:relative;${unlocked ? '' : 'opacity:.7;'}">
+                ${unlocked ? `<div style="position:absolute;top:-10px;right:14px;background:${p.color};color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;">¡Disponible!</div>` : ''}
+                <div style="font-size:36px;margin-bottom:10px;">${p.icon}</div>
+                <div style="font-size:14px;font-weight:700;color:#1C2B2D;margin-bottom:5px;">${p.title}</div>
+                <div style="font-size:12px;color:#546E7A;line-height:1.5;margin-bottom:12px;">${p.desc}</div>
+                <div style="font-size:18px;font-weight:800;color:${p.color};margin-bottom:10px;">${p.pts.toLocaleString()} pts</div>
+                <button ${!unlocked ? 'disabled' : `onclick="redeemPrize('${p.title}')"`}
+                    style="width:100%;padding:9px;border-radius:8px;border:none;background:${unlocked ? p.color : '#E0E7EF'};color:${unlocked ? '#fff' : '#90A4AE'};font-size:13px;font-weight:600;cursor:${unlocked ? 'pointer' : 'not-allowed'};">
+                    ${unlocked ? 'Canjear premio' : `Faltan ${p.pts - MY_PTS} pts`}
+                </button>
+            </div>`;
+        }).join('');
+    }
+
+    function redeemPrize(title) {
+        const toast = document.createElement('div');
+        toast.innerHTML = `🎁 <strong>¡${title}</strong> solicitado! El equipo de RRHH te contactará pronto.`;
+        toast.style.cssText = 'position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#F57C00;color:#fff;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:600;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.18);max-width:90%;text-align:center;';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 4000);
+    }
+
+    // Inicializar Súmate cuando se navega a esa sección
+    const origGoTo = goTo;
+    goTo = function(id) {
+        origGoTo(id);
+        if (id === 'sumate') initSumate();
+    };
+
+    function initSumate() {
+        buildLeaderboard();
+        buildChallenges();
+        buildPrizes();
+        animProgress = 0;
+        runChartAnim();
+    }
+
+    // Redibujar gráfico al redimensionar
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (document.getElementById('sec-sumate').classList.contains('active')) drawChart(1);
+        }, 150);
     });
 </script>
 
