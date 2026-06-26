@@ -1290,90 +1290,158 @@
 
             <!-- Documentos disponibles -->
             <h3 style="font-size:15px;font-weight:700;color:#1C2B2D;margin-bottom:6px;">Documentos disponibles</h3>
-            <p style="font-size:12.5px;color:#90A4AE;margin-bottom:18px;">Selecciona una carpeta para acceder a sus documentos en SICREO 2.0</p>
-            <div class="sicreo-grid">
+            <p style="font-size:12.5px;color:#90A4AE;margin-bottom:20px;">Selecciona una carpeta para acceder a sus documentos. Los sistemas externos se abren en una nueva pestaña.</p>
 
-                <!-- SOLPEC -->
-                <a href="https://nextcloud.net.co/index.php/s/4YkpXq3ESFPM78f" target="_blank" rel="noopener" style="text-decoration:none;">
-                    <div class="sicreo-card" style="cursor:pointer;">
-                        <div class="sicreo-icon ic-blue">
-                            <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-                            </svg>
+            <!-- Fila superior: sistemas externos -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:16px;">
+
+                <!-- SOLPEC — sistema externo -->
+                <a href="https://solpec.net/" target="_blank" rel="noopener" style="text-decoration:none;">
+                    <div class="sicreo-card" style="cursor:pointer;border-left:4px solid #1565C0;padding-left:16px;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                            <div class="sicreo-icon ic-blue" style="margin-bottom:0;width:42px;height:42px;">
+                                <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                    <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+                                </svg>
+                            </div>
+                            <span style="font-size:10px;font-weight:700;background:#E3F2FD;color:#1565C0;padding:3px 8px;border-radius:8px;white-space:nowrap;">Sistema externo</span>
                         </div>
-                        <h4 style="font-size:15px;font-weight:800;letter-spacing:.3px;">SOLPEC</h4>
-                        <p>Solicitudes de pedido y control de entrega</p>
-                        <span style="display:inline-flex;align-items:center;gap:4px;margin-top:10px;font-size:11px;font-weight:700;color:#1565C0;">
-                            Abrir carpeta
-                            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                        <h4 style="font-size:16px;font-weight:800;color:#1C2B2D;letter-spacing:.4px;margin-bottom:4px;">SOLPEC</h4>
+                        <p style="font-size:12px;color:#546E7A;margin-bottom:12px;">Sistema de solicitudes de pedido y control de entrega · solpec.net</p>
+                        <span style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;color:#1565C0;">
+                            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            Abrir SOLPEC
                         </span>
                     </div>
                 </a>
 
-                <!-- CODORCOL -->
-                <a href="https://nextcloud.net.co/index.php/s/4YkpXq3ESFPM78f" target="_blank" rel="noopener" style="text-decoration:none;">
-                    <div class="sicreo-card" style="cursor:pointer;">
-                        <div class="sicreo-icon ic-orange">
-                            <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-                            </svg>
+                <!-- CODORCOL — sistema externo -->
+                <a href="https://op1.codorcol.cyberteconline.com/" target="_blank" rel="noopener" style="text-decoration:none;">
+                    <div class="sicreo-card" style="cursor:pointer;border-left:4px solid #F57C00;padding-left:16px;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                            <div class="sicreo-icon ic-orange" style="margin-bottom:0;width:42px;height:42px;">
+                                <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                    <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+                                </svg>
+                            </div>
+                            <span style="font-size:10px;font-weight:700;background:#FFF3E0;color:#F57C00;padding:3px 8px;border-radius:8px;white-space:nowrap;">Sistema externo</span>
                         </div>
-                        <h4 style="font-size:15px;font-weight:800;letter-spacing:.3px;">CODORCOL</h4>
-                        <p>Coordinación y control de operaciones Colombia</p>
-                        <span style="display:inline-flex;align-items:center;gap:4px;margin-top:10px;font-size:11px;font-weight:700;color:#F57C00;">
-                            Abrir carpeta
-                            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                        <h4 style="font-size:16px;font-weight:800;color:#1C2B2D;letter-spacing:.4px;margin-bottom:4px;">CODORCOL</h4>
+                        <p style="font-size:12px;color:#546E7A;margin-bottom:12px;">Coordinación y control de operaciones Colombia · cyberteconline.com</p>
+                        <span style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;color:#F57C00;">
+                            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            Abrir CODORCOL
                         </span>
                     </div>
                 </a>
 
-                <!-- MPA -->
+            </div>
+
+            <!-- Fila inferior: carpetas Nextcloud del mapa de procesos -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;">
+
+                <!-- MPD -->
                 <a href="https://nextcloud.net.co/index.php/s/4YkpXq3ESFPM78f" target="_blank" rel="noopener" style="text-decoration:none;">
-                    <div class="sicreo-card" style="cursor:pointer;">
-                        <div class="sicreo-icon ic-green">
-                            <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-                            </svg>
+                    <div class="sicreo-card" style="cursor:pointer;border-left:4px solid #6A1B9A;padding-left:16px;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                            <div class="sicreo-icon ic-purple" style="margin-bottom:0;width:42px;height:42px;">
+                                <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                                </svg>
+                            </div>
+                            <span style="font-size:10px;font-weight:700;background:#F3E5F5;color:#6A1B9A;padding:3px 8px;border-radius:8px;">Nextcloud</span>
                         </div>
-                        <h4 style="font-size:15px;font-weight:800;letter-spacing:.3px;">MPA</h4>
-                        <p>Procesos de Apoyo — manuales, formatos y procedimientos de soporte organizacional</p>
-                        <span style="display:inline-flex;align-items:center;gap:4px;margin-top:10px;font-size:11px;font-weight:700;color:#2E7D32;">
-                            Abrir carpeta
-                            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                        <h4 style="font-size:16px;font-weight:800;color:#1C2B2D;letter-spacing:.4px;margin-bottom:2px;">MPD</h4>
+                        <p style="font-size:11px;font-weight:600;color:#6A1B9A;margin-bottom:10px;">Procesos de Dirección</p>
+                        <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
+                            <div style="font-size:11.5px;color:#37474F;">
+                                <span style="font-weight:700;color:#1C2B2D;">Gestión Estratégica (GE)</span>
+                                <span style="color:#90A4AE;margin-left:4px;">· DM · CR</span>
+                            </div>
+                            <div style="font-size:11.5px;color:#37474F;">
+                                <span style="font-weight:700;color:#1C2B2D;">Sistemas Integrados de Gestión (SI)</span>
+                                <span style="color:#90A4AE;margin-left:4px;">· DS · CA · GT</span>
+                            </div>
+                            <div style="font-size:11.5px;color:#37474F;">
+                                <span style="font-weight:700;color:#1C2B2D;">Gestión del Saber (GS)</span>
+                                <span style="color:#90A4AE;margin-left:4px;">· GT · PI</span>
+                            </div>
+                        </div>
+                        <span style="display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;color:#6A1B9A;">
+                            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                            Abrir carpeta MPD
                         </span>
                     </div>
                 </a>
 
                 <!-- MPO -->
                 <a href="https://nextcloud.net.co/index.php/s/4YkpXq3ESFPM78f" target="_blank" rel="noopener" style="text-decoration:none;">
-                    <div class="sicreo-card" style="cursor:pointer;">
-                        <div class="sicreo-icon ic-teal">
-                            <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-                            </svg>
+                    <div class="sicreo-card" style="cursor:pointer;border-left:4px solid #00695C;padding-left:16px;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                            <div class="sicreo-icon ic-teal" style="margin-bottom:0;width:42px;height:42px;">
+                                <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                                </svg>
+                            </div>
+                            <span style="font-size:10px;font-weight:700;background:#E0F2F1;color:#00695C;padding:3px 8px;border-radius:8px;">Nextcloud</span>
                         </div>
-                        <h4 style="font-size:15px;font-weight:800;letter-spacing:.3px;">MPO</h4>
-                        <p>Procesos Operacionales — documentos de producción, logística y operaciones de campo</p>
-                        <span style="display:inline-flex;align-items:center;gap:4px;margin-top:10px;font-size:11px;font-weight:700;color:#00695C;">
-                            Abrir carpeta
-                            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                        <h4 style="font-size:16px;font-weight:800;color:#1C2B2D;letter-spacing:.4px;margin-bottom:2px;">MPO</h4>
+                        <p style="font-size:11px;font-weight:600;color:#00695C;margin-bottom:10px;">Procesos Operacionales</p>
+                        <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
+                            <div style="font-size:11.5px;color:#37474F;">
+                                <span style="font-weight:700;color:#1C2B2D;">Gestión Comercial (GC)</span>
+                                <span style="color:#90A4AE;margin-left:4px;">· SC · MC · VT</span>
+                            </div>
+                            <div style="font-size:11.5px;color:#37474F;">
+                                <span style="font-weight:700;color:#1C2B2D;">Gestión Cadena de Suministro (GL)</span>
+                                <span style="color:#90A4AE;margin-left:4px;">· CO · LO</span>
+                            </div>
+                            <div style="font-size:11.5px;color:#37474F;">
+                                <span style="font-weight:700;color:#1C2B2D;">Gestión de Operaciones (GO)</span>
+                                <span style="color:#90A4AE;margin-left:4px;">· PP · DD · PV · PY · SV</span>
+                            </div>
+                        </div>
+                        <span style="display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;color:#00695C;">
+                            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                            Abrir carpeta MPO
                         </span>
                     </div>
                 </a>
 
-                <!-- MPD -->
+                <!-- MPA -->
                 <a href="https://nextcloud.net.co/index.php/s/4YkpXq3ESFPM78f" target="_blank" rel="noopener" style="text-decoration:none;">
-                    <div class="sicreo-card" style="cursor:pointer;">
-                        <div class="sicreo-icon ic-purple">
-                            <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-                            </svg>
+                    <div class="sicreo-card" style="cursor:pointer;border-left:4px solid #2E7D32;padding-left:16px;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                            <div class="sicreo-icon ic-green" style="margin-bottom:0;width:42px;height:42px;">
+                                <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                                </svg>
+                            </div>
+                            <span style="font-size:10px;font-weight:700;background:#E8F5E9;color:#2E7D32;padding:3px 8px;border-radius:8px;">Nextcloud</span>
                         </div>
-                        <h4 style="font-size:15px;font-weight:800;letter-spacing:.3px;">MPD</h4>
-                        <p>Procesos de Dirección — políticas, estrategias y documentos gerenciales</p>
-                        <span style="display:inline-flex;align-items:center;gap:4px;margin-top:10px;font-size:11px;font-weight:700;color:#6A1B9A;">
-                            Abrir carpeta
-                            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                        <h4 style="font-size:16px;font-weight:800;color:#1C2B2D;letter-spacing:.4px;margin-bottom:2px;">MPA</h4>
+                        <p style="font-size:11px;font-weight:600;color:#2E7D32;margin-bottom:10px;">Procesos de Apoyo</p>
+                        <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
+                            <div style="font-size:11.5px;color:#37474F;">
+                                <span style="font-weight:700;color:#1C2B2D;">Gestión Financiera y Contable (GF)</span>
+                                <span style="color:#90A4AE;margin-left:4px;">· TC · CG · CI · CN · TB</span>
+                            </div>
+                            <div style="font-size:11.5px;color:#37474F;">
+                                <span style="font-weight:700;color:#1C2B2D;">Gestión de Talento Humano (GH)</span>
+                                <span style="color:#90A4AE;margin-left:4px;">· AD · DP · RD · CM</span>
+                            </div>
+                            <div style="font-size:11.5px;color:#37474F;">
+                                <span style="font-weight:700;color:#1C2B2D;">Gestión de Infraestructura (GI)</span>
+                                <span style="color:#90A4AE;margin-left:4px;">· GI</span>
+                            </div>
+                            <div style="font-size:11.5px;color:#37474F;">
+                                <span style="font-weight:700;color:#1C2B2D;">Gestión de la Información (TI)</span>
+                                <span style="color:#90A4AE;margin-left:4px;">· NX · UC · AI · MD</span>
+                            </div>
+                        </div>
+                        <span style="display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;color:#2E7D32;">
+                            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                            Abrir carpeta MPA
                         </span>
                     </div>
                 </a>
