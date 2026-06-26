@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intranet | Insumma Business Group</title>
+    <style>
+        :root {
+            --green-dark:   #1B5E20;
+            --green-main:   #2E7D32;
+            --green-mid:    #388E3C;
+            --green-light:  #C8E6C9;
+            --green-xlight: #E8F5E9;
+            --orange-main:  #F57C00;
+            --orange-light: #FFF3E0;
+            --blue-main:    #1565C0;
+            --blue-light:   #E3F2FD;
+            --white:        #FFFFFF;
+            --gray-bg:      #F0F2F5;
+            --gray-border:  #E0E7EF;
+            --gray-text:    #546E7A;
+            --gray-muted:   #90A4AE;
+            --dark-text:    #1C2B2D;
+            --sidebar-w:    260px;
+            --header-h:     64px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+
+        body { background: var(--gray-bg); display: flex; min-height: 100vh; overflow-x: hidden; }
+
+        /* ════════════ SIDEBAR ════════════ */
+        .sidebar {
+            width: var(--sidebar-w);
+            min-height: 100vh;
+            background: linear-gradient(175deg, var(--green-dark) 0%, var(--green-main) 60%, var(--green-mid) 100%);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 100;
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .sidebar-logo {
+            padding: 20px 20px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-shrink: 0;
+        }
+
+        .sidebar-logo .brand-name { font-size: 17px; font-weight: 800; color: #fff; letter-spacing: 1.5px; line-height: 1; display: block; }
+        .sidebar-logo .brand-sub  { font-size: 9px; color: var(--green-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 3px; display: block; }
+
+        .sidebar-user {
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-shrink: 0;
+        }
+
+        .user-avatar {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: var(--orange-main);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px; font-weight: 700; color: #fff; flex-shrink: 0;
+        }
+
+        .user-info .uname { font-size: 13px; font-weight: 600; color: #fff; }
+        .user-info .urole { font-size: 11px; color: var(--green-light); margin-top: 2px; }
+
+        .sidebar-nav { flex: 1; padding: 10px 0; overflow-y: auto; }
+
+        .nav-label {
+            font-size: 10px; font-weight: 600;
+            color: rgba(255,255,255,0.38);
+            text-transform: uppercase; letter-spacing: 1.2px;
+            padding: 12px 20px 5px;
+        }
+
+        .nav-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 11px 20px;
+            cursor: pointer;
+            color: rgba(255,255,255,0.74);
+            font-size: 13.5px; font-weight: 500;
+            transition: background 0.15s, color 0.15s;
+            position: relative;
+            background: none; border: none; width: 100%; text-align: left;
+        }
+
+        .nav-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
+
+        .nav-item.active {
+            background: rgba(255,255,255,0.13);
+            color: #fff; font-weight: 600;
+        }
+
+        .nav-item.active::before {
+            content: '';
+            position: absolute; left: 0; top: 0; bottom: 0;
+            width: 4px; background: var(--orange-main);
+            border-radius: 0 3px 3px 0;
+        }
+
+        .nav-icon { width: 19px; height: 19px; flex-shrink: 0; opacity: 0.8; }
+        .nav-item.active .nav-icon, .nav-item:hover .nav-icon { opacity: 1; }
+
+        .nav-badge {
+            margin-left: auto; background: var(--orange-main);
+            color: #fff; font-size: 10px; font-weight: 700;
+            padding: 2px 7px; border-radius: 10px;
+        }
+
+        .sidebar-footer {
+            padding: 14px 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            flex-shrink: 0;
+        }
+
+        .btn-logout {
+            display: flex; align-items: center; gap: 10px;
+            width: 100%; padding: 10px 14px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 8px; color: rgba(255,255,255,0.7);
+            font-size: 13px; cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+            text-decoration: none;
+        }
+
+        .btn-logout:hover { background: rgba(229,57,53,0.2); color: #EF9A9A; border-color: rgba(229,57,53,0.3); }
+
+        /* ════════════ MAIN ════════════ */
+        .main-wrap {
+            margin-left: var(--sidebar-w);
+            flex: 1; display: flex; flex-direction: column;
+            min-height: 100vh; min-width: 0;
+        }
+
+        .header {
+            height: var(--header-h);
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-border);
+            display: flex; align-items: center;
+            padding: 0 28px; gap: 16px;
+            position: sticky; top: 0; z-index: 50;
+        }
+
+        .hamburger {
+            display: none; background: none; border: none;
+            cursor: pointer; color: var(--gray-text); padding: 4px;
+        }
+
+        .header-title { flex: 1; }
+        .header-title h1 { font-size: 17px; font-weight: 700; color: var(--dark-text); }
+        .header-title p  { font-size: 12px; color: var(--gray-muted); margin-top: 1px; }
+
+        .header-actions { display: flex; align-items: center; gap: 10px; }
+
+        .icon-btn {
+            width: 38px; height: 38px; border-radius: 50%;
+            background: var(--gray-bg); border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--gray-text); position: relative; transition: background 0.15s;
+        }
+
+        .icon-btn:hover { background: var(--green-xlight); color: var(--green-main); }
+
+        .notif-dot {
+            position: absolute; top: 7px; right: 7px;
+            width: 7px; height: 7px;
+            background: var(--orange-main); border-radius: 50%;
+            border: 2px solid var(--white);
+        }
+
+        .header-avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: var(--green-main); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 700; cursor: pointer;
+            border: 2px solid var(--green-light);
+        }
+
+        /* ════════════ CONTENIDO ════════════ */
+        .content-area {
+            flex: 1; padding: 28px;
+            overflow-y: auto;
+            height: calc(100vh - var(--header-h));
+        }
+
+        .section { display: none; }
+        .section.active { display: block; }
+
+        /* Banner bienvenida */
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--green-main) 0%, var(--green-mid) 100%);
+            border-radius: 14px; padding: 28px 32px; color: #fff;
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 24px; overflow: hidden; position: relative;
+        }
+
+        .welcome-banner::after {
+            content: ''; position: absolute;
+            width: 240px; height: 240px; border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            right: -60px; top: -60px;
+        }
+
+        .welcome-banner h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+        .welcome-banner p  { font-size: 14px; opacity: 0.82; }
+
+        .welcome-date .wday  { font-size: 46px; font-weight: 800; line-height: 1; }
+        .welcome-date .wrest { font-size: 13px; opacity: 0.75; text-align: right; }
+
+        /* Grid de accesos rápidos */
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+            gap: 13px; margin-bottom: 26px;
+        }
+
+        .quick-card {
+            background: var(--white); border-radius: 12px;
+            padding: 18px 14px;
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            cursor: pointer;
+            border: 1.5px solid var(--gray-border);
+            transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+            text-align: center;
+        }
+
+        .quick-card:hover {
+            border-color: var(--green-main);
+            box-shadow: 0 4px 16px rgba(46,125,50,0.12);
+            transform: translateY(-2px);
+        }
+
+        .qc-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .qc-label { font-size: 12px; font-weight: 600; color: var(--dark-text); line-height: 1.3; }
+
+        /* Colores de ícono */
+        .ic-green  { background: var(--green-xlight); color: var(--green-main); }
+        .ic-orange { background: var(--orange-light);  color: var(--orange-main); }
+        .ic-blue   { background: var(--blue-light);    color: var(--blue-main); }
+        .ic-purple { background: #EDE7F6; color: #6A1B9A; }
+        .ic-teal   { background: #E0F2F1; color: #00695C; }
+        .ic-red    { background: #FFEBEE; color: #C62828; }
+
+        /* Grid de contenido principal */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+        }
+
+        /* Card genérica */
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            border: 1px solid var(--gray-border);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--gray-border);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+
+        .card-header h3 { font-size: 14px; font-weight: 700; color: var(--dark-text); }
+        .see-all { font-size: 12px; color: var(--green-main); text-decoration: none; font-weight: 600; }
+
+        /* Ítem de noticia */
+        .news-item {
+            display: flex; gap: 14px; padding: 15px 20px;
+            border-bottom: 1px solid var(--gray-border);
+            cursor: pointer; transition: background 0.15s;
+        }
+
+        .news-item:last-child { border-bottom: none; }
+        .news-item:hover { background: var(--gray-bg); }
+
+        .news-thumb {
+            width: 54px; height: 54px; border-radius: 10px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center; font-size: 22px;
+        }
+
+        .news-item .ni-title { font-size: 13.5px; font-weight: 600; color: var(--dark-text); margin-bottom: 4px; line-height: 1.3; }
+        .news-item .ni-desc  { font-size: 12px; color: var(--gray-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .news-item .ni-date  { font-size: 11px; color: var(--gray-muted); margin-top: 5px; }
+
+        /* Widget ítems */
+        .widget-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--gray-border);
+        }
+
+        .widget-item:last-child { border-bottom: none; }
+
+        .w-avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            font-size: 12px; font-weight: 700; color: #fff;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+
+        .w-name { font-size: 13px; font-weight: 600; color: var(--dark-text); }
+        .w-sub  { font-size: 11px; color: var(--gray-muted); margin-top: 1px; }
+        .w-tag  { margin-left: auto; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 8px; white-space: nowrap; }
+
+        /* Título de sección */
+        .page-title { margin-bottom: 20px; }
+        .page-title h2 { font-size: 20px; font-weight: 700; color: var(--dark-text); }
+        .page-title p  { font-size: 13px; color: var(--gray-text); margin-top: 4px; }
+
+        /* Grid de sección */
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        /* Card de sección */
+        .sec-card {
+            background: var(--white); border: 1px solid var(--gray-border);
+            border-radius: 12px; padding: 20px;
+            transition: box-shadow 0.2s, border-color 0.2s; cursor: pointer;
+        }
+
+        .sec-card:hover { border-color: var(--green-main); box-shadow: 0 3px 12px rgba(46,125,50,0.1); }
+
+        .sc-tag {
+            display: inline-block; font-size: 10px; font-weight: 700;
+            padding: 3px 9px; border-radius: 8px; margin-bottom: 10px; text-transform: uppercase;
+        }
+
+        .sc-title  { font-size: 14px; font-weight: 700; color: var(--dark-text); margin-bottom: 6px; }
+        .sc-desc   { font-size: 12.5px; color: var(--gray-text); line-height: 1.55; }
+        .sc-footer {
+            margin-top: 12px; font-size: 11px; color: var(--gray-muted);
+            display: flex; align-items: center; gap: 5px;
+        }
+
+        /* Botones */
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 22px;
+            background: var(--green-main); color: #fff;
+            border-radius: 8px; font-size: 13.5px; font-weight: 600;
+            border: none; cursor: pointer; text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .btn-primary:hover { opacity: 0.88; }
+
+        .btn-secondary {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 9px 20px;
+            background: var(--orange-light); color: var(--orange-main);
+            border-radius: 8px; font-size: 13.5px; font-weight: 600;
+            border: 1.5px solid var(--orange-main); cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover { background: #FFE0B2; }
+
+        /* Directorio */
+        .directory-bar { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+
+        .search-wrap { position: relative; flex: 1; min-width: 200px; }
+        .search-wrap svg {
+            position: absolute; left: 13px; top: 50%;
+            transform: translateY(-50%); color: var(--gray-muted); pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%; padding: 10px 14px 10px 40px;
+            border: 1.5px solid var(--gray-border); border-radius: 9px;
+            font-size: 13px; color: var(--dark-text);
+            background: var(--white); outline: none; transition: border-color 0.2s;
+        }
+
+        .search-input:focus { border-color: var(--green-main); }
+
+        .filter-select {
+            padding: 10px 14px;
+            border: 1.5px solid var(--gray-border); border-radius: 9px;
+            font-size: 13px; background: var(--white);
+            color: var(--dark-text); outline: none; cursor: pointer;
+        }
+
+        .dir-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 14px; }
+
+        .dir-card {
+            background: var(--white); border: 1px solid var(--gray-border);
+            border-radius: 12px; padding: 20px; text-align: center;
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .dir-card:hover { border-color: var(--green-main); box-shadow: 0 3px 12px rgba(46,125,50,0.1); }
+
+        .dir-avatar {
+            width: 54px; height: 54px; border-radius: 50%;
+            margin: 0 auto 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 19px; font-weight: 700; color: #fff;
+        }
+
+        .dir-name { font-size: 14px; font-weight: 700; color: var(--dark-text); margin-bottom: 3px; }
+        .dir-role { font-size: 12px; color: var(--gray-text); }
+        .dir-area { font-size: 11px; color: var(--green-main); font-weight: 600; margin-top: 2px; }
+
+        .dir-actions { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+
+        .dir-btn {
+            width: 34px; height: 34px; border-radius: 50%;
+            border: 1.5px solid var(--gray-border); background: var(--gray-bg);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; color: var(--gray-text);
+            transition: background 0.15s, border-color 0.15s, color 0.15s;
+        }
+
+        .dir-btn:hover { background: var(--green-xlight); border-color: var(--green-main); color: var(--green-main); }
+
+        /* Foro */
+        .forum-item {
+            display: flex; gap: 14px; padding: 16px 20px;
+            border-bottom: 1px solid var(--gray-border);
+            cursor: pointer; transition: background 0.15s;
+        }
+
+        .forum-item:last-child { border-bottom: none; }
+        .forum-item:hover { background: var(--gray-bg); }
+
+        .forum-votes {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 2px; flex-shrink: 0; min-width: 34px;
+        }
+
+        .forum-votes button {
+            background: none; border: none; cursor: pointer;
+            color: var(--gray-muted); display: flex; align-items: center;
+            padding: 2px; border-radius: 4px;
+            transition: color 0.15s, background 0.15s;
+        }
+
+        .forum-votes button:hover { color: var(--green-main); background: var(--green-xlight); }
+        .fv-score { font-size: 13px; font-weight: 700; color: var(--dark-text); }
+
+        .ftitle { font-size: 14px; font-weight: 600; color: var(--dark-text); margin-bottom: 4px; }
+        .fdesc  { font-size: 12px; color: var(--gray-text); margin-bottom: 6px; line-height: 1.5; }
+        .forum-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .ftag { font-size: 10.5px; font-weight: 600; padding: 2px 8px; border-radius: 6px; background: var(--green-xlight); color: var(--green-main); }
+
+        /* Calendario */
+        .cal-grid { display: grid; grid-template-columns: 1fr 290px; gap: 20px; }
+
+        .cal-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 20px; border-bottom: 1px solid var(--gray-border);
+        }
+
+        .cal-nav { display: flex; gap: 6px; }
+
+        .cal-nav button {
+            width: 30px; height: 30px; border-radius: 6px;
+            border: 1px solid var(--gray-border); background: none;
+            cursor: pointer; color: var(--gray-text);
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.15s;
+        }
+
+        .cal-nav button:hover { background: var(--green-xlight); color: var(--green-main); }
+
+        .cal-month { font-size: 15px; font-weight: 700; color: var(--dark-text); }
+
+        .cal-days-hdr {
+            display: grid; grid-template-columns: repeat(7,1fr);
+            text-align: center; padding: 10px 16px 0;
+        }
+
+        .cal-days-hdr span { font-size: 11px; font-weight: 700; color: var(--gray-muted); text-transform: uppercase; }
+
+        .cal-days { display: grid; grid-template-columns: repeat(7,1fr); gap: 2px; padding: 6px 12px 16px; }
+
+        .cal-day {
+            aspect-ratio: 1;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; font-size: 13px; color: var(--dark-text);
+            cursor: pointer; transition: background 0.15s; position: relative;
+        }
+
+        .cal-day:hover { background: var(--green-xlight); }
+        .cal-day.today { background: var(--green-main); color: #fff; font-weight: 700; }
+        .cal-day.other-month { color: var(--gray-muted); }
+
+        .cal-day.has-event::after {
+            content: ''; position: absolute; bottom: 3px;
+            width: 5px; height: 5px; background: var(--orange-main); border-radius: 50%;
+        }
+
+        /* Formulario de ideas */
+        .idea-form {
+            background: var(--white); border: 1px solid var(--gray-border);
+            border-radius: 12px; padding: 24px; margin-bottom: 20px;
+        }
+
+        .idea-form h3 { font-size: 16px; font-weight: 700; color: var(--dark-text); margin-bottom: 16px; }
+
+        .form-row { margin-bottom: 16px; }
+        .form-row label { display: block; font-size: 12.5px; font-weight: 600; color: var(--dark-text); margin-bottom: 6px; }
+
+        .form-row input,
+        .form-row select,
+        .form-row textarea {
+            width: 100%; padding: 10px 14px;
+            border: 1.5px solid var(--gray-border); border-radius: 8px;
+            font-size: 13.5px; color: var(--dark-text);
+            background: var(--gray-bg); outline: none;
+            transition: border-color 0.2s; font-family: inherit;
+        }
+
+        .form-row input:focus,
+        .form-row select:focus,
+        .form-row textarea:focus { border-color: var(--green-main); background: #fff; }
+
+        .form-row textarea { resize: vertical; min-height: 100px; }
+
+        .anon-row { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--gray-text); cursor: pointer; }
+        .anon-row input { width: 15px; height: 15px; accent-color: var(--green-main); cursor: pointer; }
+
+        /* SICREO */
+        .sicreo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px,1fr));
+            gap: 16px; margin-top: 4px;
+        }
+
+        .sicreo-card {
+            background: var(--white); border: 1px solid var(--gray-border);
+            border-radius: 12px; padding: 24px 20px; text-align: center;
+            cursor: pointer;
+            transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+        }
+
+        .sicreo-card:hover {
+            border-color: var(--blue-main);
+            box-shadow: 0 4px 16px rgba(21,101,192,0.12);
+            transform: translateY(-2px);
+        }
+
+        .sicreo-icon {
+            width: 54px; height: 54px; border-radius: 15px;
+            margin: 0 auto 14px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .sicreo-card h4 { font-size: 14px; font-weight: 700; color: var(--dark-text); margin-bottom: 5px; }
+        .sicreo-card p  { font-size: 12px; color: var(--gray-text); line-height: 1.5; }
+
+        /* Overlay móvil */
+        .sidebar-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.4); z-index: 90;
+        }
+
+        /* ════════════ RESPONSIVE ════════════ */
+        @media (max-width: 960px) {
+            .content-grid, .cal-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .sidebar-overlay.open { display: block; }
+            .main-wrap { margin-left: 0; }
+            .hamburger { display: flex; }
+            .welcome-banner { flex-direction: column; gap: 16px; }
+            .welcome-date .wrest { text-align: left; }
+            .quick-grid { grid-template-columns: repeat(3,1fr); }
+            .content-area { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar-overlay" id="overlay"></div>
+
+<!-- ════════════ SIDEBAR ════════════ -->
+<nav class="sidebar" id="sidebar">
+
+    <div class="sidebar-logo">
+        <svg width="40" height="40" viewBox="0 0 54 54" fill="none">
+            <rect width="54" height="54" rx="13" fill="rgba(255,255,255,0.12)"/>
+            <circle cx="19" cy="15" r="5" fill="#F57C00"/>
+            <circle cx="35" cy="15" r="5" fill="#64B5F6"/>
+            <text x="7" y="43" font-family="Segoe UI" font-weight="900" font-size="19" fill="white" letter-spacing="1">IBG</text>
+        </svg>
+        <div>
+            <span class="brand-name">INSUMMA</span>
+            <span class="brand-sub">Business Group S.A.</span>
+        </div>
+    </div>
+
+    <div class="sidebar-user">
+        <div class="user-avatar" id="sbInitials">JD</div>
+        <div class="user-info">
+            <div class="uname" id="sbName">Juan Díaz</div>
+            <div class="urole" id="sbRole">Colaborador</div>
+        </div>
+    </div>
+
+    <div class="sidebar-nav">
+        <div class="nav-label">Principal</div>
+
+        <button class="nav-item active" data-sec="inicio">
+            <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            Inicio
+        </button>
+
+        <button class="nav-item" data-sec="enterate">
+            <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l6 6v8a2 2 0 0 1-2 2z"/>
+                <polyline points="17 21 17 13 7 13 7 21"/>
+                <polyline points="7 3 7 8 15 8"/>
+            </svg>
+            Entérate
+            <span class="nav-badge">3</span>
+        </button>
+
+        <button class="nav-item" data-sec="sumate">
+            <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            Súmate
+        </button>
+
+        <button class="nav-item" data-sec="directorio">
+            <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            Directorio Corporativo
+        </button>
+
+        <div class="nav-label" style="margin-top:6px;">Comunidad</div>
+
+        <button class="nav-item" data-sec="reconocimientos">
+            <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Reconocimientos
+            <span class="nav-badge">1</span>
+        </button>
+
+        <button class="nav-item" data-sec="foro">
+            <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            Foro
+        </button>
+
+        <div class="nav-label" style="margin-top:6px;">Agenda</div>
+
+        <button class="nav-item" data-sec="calendario">
+            <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8"  y1="2" x2="8"  y2="6"/>
+                <line x1="3"  y1="10" x2="21" y2="10"/>
+            </svg>
+            Calendario Corporativo
+        </button>
+
+        <button class="nav-item" data-sec="eventos">
+            <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path d="M20 12V22H4V12"/>
+                <path d="M22 7H2v5h20V7z"/>
+                <path d="M12 22V7"/>
+                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+            </svg>
+            Eventos
+        </button>
+
+        <div class="nav-label" style="margin-top:6px;">Herramientas</div>
+
+        <button class="nav-item" data-sec="buzon">
+            <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 1 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+            </svg>
+            Buzón de Ideas
+        </button>
+
+        <button class="nav-item" data-sec="sicreo">
+            <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <path d="M8 21h8M12 17v4"/>
+                <path d="M7 8h.01M12 8h.01M17 8h.01M7 12h10"/>
+            </svg>
+            SICREO
+        </button>
+    </div>
+
+    <div class="sidebar-footer">
+        <a href="index.html" class="btn-logout">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            Cerrar Sesión
+        </a>
+    </div>
+</nav>
+
+<!-- ════════════ MAIN ════════════ -->
+<div class="main-wrap">
+
+    <header class="header">
+        <button class="hamburger" id="hamburger" aria-label="Menú">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="6"  x2="21" y2="6"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+        </button>
+
+        <div class="header-title">
+            <h1 id="hTitle">Inicio</h1>
+            <p id="hSub">Portal Intranet Corporativo · Insumma Business Group</p>
+        </div>
+
+        <div class="header-actions">
+            <button class="icon-btn" title="Notificaciones">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                </svg>
+                <span class="notif-dot"></span>
+            </button>
+            <button class="icon-btn" title="Configuración">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+            </button>
+            <div class="header-avatar" id="hAvatar">JD</div>
+        </div>
+    </header>
+
+    <main class="content-area">
+
+        <!-- ══ INICIO ══ -->
+        <section class="section active" id="sec-inicio">
+            <div class="welcome-banner">
+                <div>
+                    <h2>¡Bienvenido, <span id="wName">colaborador</span>!</h2>
+                    <p>Tienes <strong>3 noticias nuevas</strong> y <strong>1 reconocimiento</strong> pendiente de ver.</p>
+                </div>
+                <div class="welcome-date">
+                    <div class="wday" id="wDay">26</div>
+                    <div class="wrest" id="wDate">junio 2026</div>
+                </div>
+            </div>
+
+            <div class="quick-grid">
+                <div class="quick-card" onclick="goTo('enterate')">
+                    <div class="qc-icon ic-green">
+                        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l6 6v8a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
+                    </div>
+                    <span class="qc-label">Entérate</span>
+                </div>
+                <div class="quick-card" onclick="goTo('sumate')">
+                    <div class="qc-icon ic-orange">
+                        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <span class="qc-label">Súmate</span>
+                </div>
+                <div class="quick-card" onclick="goTo('directorio')">
+                    <div class="qc-icon ic-blue">
+                        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                    </div>
+                    <span class="qc-label">Directorio</span>
+                </div>
+                <div class="quick-card" onclick="goTo('reconocimientos')">
+                    <div class="qc-icon ic-purple">
+                        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <span class="qc-label">Reconocimientos</span>
+                </div>
+                <div class="quick-card" onclick="goTo('foro')">
+                    <div class="qc-icon ic-teal">
+                        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    </div>
+                    <span class="qc-label">Foro</span>
+                </div>
+                <div class="quick-card" onclick="goTo('calendario')">
+                    <div class="qc-icon ic-blue">
+                        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </div>
+                    <span class="qc-label">Calendario</span>
+                </div>
+                <div class="quick-card" onclick="goTo('eventos')">
+                    <div class="qc-icon ic-orange">
+                        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/></svg>
+                    </div>
+                    <span class="qc-label">Eventos</span>
+                </div>
+                <div class="quick-card" onclick="goTo('buzon')">
+                    <div class="qc-icon ic-green">
+                        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 1 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    </div>
+                    <span class="qc-label">Buzón de Ideas</span>
+                </div>
+                <div class="quick-card" onclick="goTo('sicreo')">
+                    <div class="qc-icon ic-blue">
+                        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                    </div>
+                    <span class="qc-label">SICREO</span>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Últimas noticias</h3>
+                        <a href="#" class="see-all" onclick="goTo('enterate');return false;">Ver todas</a>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-thumb ic-green">📢</div>
+                        <div>
+                            <div class="ni-title">Nueva política de bienestar laboral 2026</div>
+                            <div class="ni-desc">Conoce los cambios en beneficios para todos los colaboradores de Insumma BG.</div>
+                            <div class="ni-date">Hace 2 horas · Recursos Humanos</div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-thumb ic-orange">🏆</div>
+                        <div>
+                            <div class="ni-title">Resultados Q1 2026 — Superamos la meta</div>
+                            <div class="ni-desc">El equipo de Salud Animal logró un crecimiento del 18% en el primer trimestre.</div>
+                            <div class="ni-date">Hace 1 día · Gerencia General</div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-thumb ic-blue">🎓</div>
+                        <div>
+                            <div class="ni-title">Inscripciones abiertas — Capacitación Q2</div>
+                            <div class="ni-desc">Programa de formación en bioseguridad y nutrición animal disponible para todos.</div>
+                            <div class="ni-date">Hace 2 días · Gestión Humana</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:flex;flex-direction:column;gap:16px;">
+                    <div class="card">
+                        <div class="card-header"><h3>🎂 Cumpleaños del mes</h3></div>
+                        <div class="widget-item">
+                            <div class="w-avatar" style="background:#F57C00;">MC</div>
+                            <div><div class="w-name">María Castro</div><div class="w-sub">Nutrición Animal</div></div>
+                            <span class="w-tag" style="background:#FFF3E0;color:#F57C00;">Hoy 🎉</span>
+                        </div>
+                        <div class="widget-item">
+                            <div class="w-avatar" style="background:#1565C0;">RP</div>
+                            <div><div class="w-name">Roberto Pardo</div><div class="w-sub">Metalmecánica</div></div>
+                            <span class="w-tag" style="background:#E3F2FD;color:#1565C0;">Jun 29</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>⭐ Reconocidos</h3>
+                            <a href="#" class="see-all" onclick="goTo('reconocimientos');return false;">Ver más</a>
+                        </div>
+                        <div class="widget-item">
+                            <div class="w-avatar" style="background:#2E7D32;">LP</div>
+                            <div><div class="w-name">Laura Peña</div><div class="w-sub">Bioseguridad</div></div>
+                            <span class="w-tag" style="background:#E8F5E9;color:#2E7D32;">⭐ MVP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ ENTÉRATE ══ -->
+        <section class="section" id="sec-enterate">
+            <div class="page-title"><h2>Entérate</h2><p>Noticias, comunicados y novedades de Insumma Business Group</p></div>
+            <div class="section-grid">
+                <div class="sec-card"><span class="sc-tag" style="background:#E8F5E9;color:#2E7D32;">Corporativo</span><div class="sc-title">Nueva política de bienestar laboral 2026</div><div class="sc-desc">Conoce los cambios en los beneficios para todos los colaboradores. Se implementan nuevas jornadas flexibles y apoyo en salud mental.</div><div class="sc-footer">Hace 2 horas · Recursos Humanos</div></div>
+                <div class="sec-card"><span class="sc-tag" style="background:#FFF3E0;color:#F57C00;">Resultados</span><div class="sc-title">Q1 2026 — Superamos la meta comercial</div><div class="sc-desc">Salud Animal creció 18% y Nutrición animal 12%. Gracias a todo el equipo por el esfuerzo y dedicación.</div><div class="sc-footer">Hace 1 día · Gerencia General</div></div>
+                <div class="sec-card"><span class="sc-tag" style="background:#E3F2FD;color:#1565C0;">Formación</span><div class="sc-title">Inscripciones abiertas — Capacitación Q2</div><div class="sc-desc">Programa de formación en bioseguridad y nutrición animal disponible para todos los colaboradores. Cupos limitados.</div><div class="sc-footer">Hace 2 días · Gestión Humana</div></div>
+                <div class="sec-card"><span class="sc-tag" style="background:#E8F5E9;color:#2E7D32;">Sostenibilidad</span><div class="sc-title">Segunda fase del programa de reciclaje</div><div class="sc-desc">Iniciamos la segunda fase del programa de gestión ambiental en todas las instalaciones. Participa y marca la diferencia.</div><div class="sc-footer">Hace 3 días · HSEQ</div></div>
+            </div>
+        </section>
+
+        <!-- ══ SÚMATE ══ -->
+        <section class="section" id="sec-sumate">
+            <div class="page-title"><h2>Súmate</h2><p>Iniciativas, voluntariados y programas en los que puedes participar</p></div>
+            <div class="section-grid">
+                <div class="sec-card"><span class="sc-tag" style="background:#E8F5E9;color:#2E7D32;">Voluntariado</span><div class="sc-title">Jornada de salud rural — Julio 2026</div><div class="sc-desc">Acompáñanos en la jornada para pequeños productores de Girón y Lebrija. Se necesitan 12 voluntarios. Actualmente 8 inscritos.</div><div class="sc-footer" style="margin-bottom:12px;">Cupos: 8/12 inscritos</div><button class="btn-primary" style="font-size:13px;padding:8px 18px;">Inscribirme</button></div>
+                <div class="sec-card"><span class="sc-tag" style="background:#FFF3E0;color:#F57C00;">Club</span><div class="sc-title">Club deportivo IBG — Temporada 2026</div><div class="sc-desc">Fútbol, ciclismo y running. Entrenos miércoles y sábados. Abierto a todos los colaboradores y familias.</div><div class="sc-footer" style="margin-bottom:12px;">34 participantes activos</div><button class="btn-primary" style="font-size:13px;padding:8px 18px;">Unirme</button></div>
+                <div class="sec-card"><span class="sc-tag" style="background:#E3F2FD;color:#1565C0;">Comité</span><div class="sc-title">Comité de Bienestar — Convocatoria</div><div class="sc-desc">3 cupos para el comité de bienestar laboral 2026-2027. Participa en la planeación de actividades para todos.</div><div class="sc-footer" style="margin-bottom:12px;">Cierre: 30 jun 2026</div><button class="btn-secondary" style="font-size:13px;padding:8px 18px;">Postularme</button></div>
+            </div>
+        </section>
+
+        <!-- ══ DIRECTORIO ══ -->
+        <section class="section" id="sec-directorio">
+            <div class="page-title"><h2>Directorio Corporativo</h2><p>Encuentra a tus compañeros de Insumma Business Group</p></div>
+            <div class="directory-bar">
+                <div class="search-wrap">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input class="search-input" type="text" placeholder="Buscar por nombre, área o cargo…">
+                </div>
+                <select class="filter-select">
+                    <option>Todas las áreas</option>
+                    <option>Salud Animal</option>
+                    <option>Bioseguridad</option>
+                    <option>Nutrición Animal</option>
+                    <option>Metalmecánica</option>
+                    <option>Gestión Humana</option>
+                    <option>Comercial</option>
+                </select>
+            </div>
+            <div class="dir-grid">
+                <div class="dir-card"><div class="dir-avatar" style="background:#2E7D32;">LP</div><div class="dir-name">Laura Peña</div><div class="dir-role">Coordinadora HSEQ</div><div class="dir-area">Bioseguridad</div><div class="dir-actions"><button class="dir-btn" title="Email"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></button><button class="dir-btn" title="Teléfono"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.5 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></button></div></div>
+                <div class="dir-card"><div class="dir-avatar" style="background:#F57C00;">MC</div><div class="dir-name">María Castro</div><div class="dir-role">Nutricionista</div><div class="dir-area">Nutrición Animal</div><div class="dir-actions"><button class="dir-btn" title="Email"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></button><button class="dir-btn" title="Teléfono"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.5 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></button></div></div>
+                <div class="dir-card"><div class="dir-avatar" style="background:#1565C0;">RP</div><div class="dir-name">Roberto Pardo</div><div class="dir-role">Técnico Industrial</div><div class="dir-area">Metalmecánica</div><div class="dir-actions"><button class="dir-btn" title="Email"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></button><button class="dir-btn" title="Teléfono"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.5 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></button></div></div>
+                <div class="dir-card"><div class="dir-avatar" style="background:#6A1B9A;">AG</div><div class="dir-name">Andrea Gómez</div><div class="dir-role">Médica Veterinaria</div><div class="dir-area">Salud Animal</div><div class="dir-actions"><button class="dir-btn" title="Email"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></button><button class="dir-btn" title="Teléfono"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.5 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></button></div></div>
+                <div class="dir-card"><div class="dir-avatar" style="background:#00695C;">JM</div><div class="dir-name">Jorge Morales</div><div class="dir-role">Asesor Comercial</div><div class="dir-area">Comercial</div><div class="dir-actions"><button class="dir-btn" title="Email"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></button><button class="dir-btn" title="Teléfono"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.5 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></button></div></div>
+                <div class="dir-card"><div class="dir-avatar" style="background:#C62828;">SR</div><div class="dir-name">Sandra Ruiz</div><div class="dir-role">Analista RRHH</div><div class="dir-area">Gestión Humana</div><div class="dir-actions"><button class="dir-btn" title="Email"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></button><button class="dir-btn" title="Teléfono"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.5 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></button></div></div>
+            </div>
+        </section>
+
+        <!-- ══ RECONOCIMIENTOS ══ -->
+        <section class="section" id="sec-reconocimientos">
+            <div class="page-title"><h2>Reconocimientos</h2><p>Celebramos los logros y el compromiso de nuestros colaboradores</p></div>
+            <div class="section-grid">
+                <div class="sec-card" style="border-left:4px solid #F57C00;"><span class="sc-tag" style="background:#FFF3E0;color:#F57C00;">⭐ MVP del Mes</span><div class="sc-title">Laura Peña — Bioseguridad</div><div class="sc-desc">Por liderar la implementación del nuevo protocolo de bioseguridad en planta, reduciendo incidentes en un 40%.</div><div class="sc-footer" style="margin-top:10px;gap:8px;"><div class="w-avatar" style="width:26px;height:26px;border-radius:50%;background:#2E7D32;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">SR</div>Nominado por Sandra Ruiz · Jun 2026</div></div>
+                <div class="sec-card" style="border-left:4px solid #1565C0;"><span class="sc-tag" style="background:#E3F2FD;color:#1565C0;">🤝 Trabajo en Equipo</span><div class="sc-title">Equipo Comercial Zona Norte</div><div class="sc-desc">Por superar la meta de ventas Q1 en un 18% gracias a la sinergia y trabajo conjunto de todo el equipo en campo.</div><div class="sc-footer" style="margin-top:10px;gap:8px;"><div class="w-avatar" style="width:26px;height:26px;border-radius:50%;background:#F57C00;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">GG</div>Gerencia General · Jun 2026</div></div>
+                <div class="sec-card" style="border-left:4px solid #2E7D32;"><span class="sc-tag" style="background:#E8F5E9;color:#2E7D32;">💡 Innovación</span><div class="sc-title">Roberto Pardo — Metalmecánica</div><div class="sc-desc">Por diseñar una solución que optimizó el proceso de producción de equipos, ahorrando 15 horas semanales de operación.</div><div class="sc-footer" style="margin-top:10px;gap:8px;"><div class="w-avatar" style="width:26px;height:26px;border-radius:50%;background:#1565C0;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">JD</div>Dir. de Producción · May 2026</div></div>
+            </div>
+        </section>
+
+        <!-- ══ FORO ══ -->
+        <section class="section" id="sec-foro">
+            <div class="page-title" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+                <div><h2>Foro Corporativo</h2><p>Debates, preguntas y conversaciones entre colaboradores</p></div>
+                <button class="btn-primary"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Nueva publicación</button>
+            </div>
+            <div class="card">
+                <div class="forum-item"><div class="forum-votes"><button>▲</button><span class="fv-score">24</span><button>▼</button></div><div><div class="ftitle">¿Cuáles son los protocolos actualizados para visitas a granjas en zona de riesgo?</div><div class="fdesc">Necesito orientación para una visita la próxima semana. ¿El protocolo de agosto sigue vigente o hay uno nuevo?</div><div class="forum-tags"><span class="ftag">Bioseguridad</span><span class="ftag">Protocolos</span><span class="ftag" style="background:#FFF3E0;color:#F57C00;">🔥 Popular</span></div><div class="sc-footer" style="margin-top:8px;">Por Laura Peña · Hace 3 horas · 8 respuestas</div></div></div>
+                <div class="forum-item"><div class="forum-votes"><button>▲</button><span class="fv-score">11</span><button>▼</button></div><div><div class="ftitle">Recomendaciones de suplementación para bovinos en época seca</div><div class="fdesc">Estoy trabajando con un cliente en Lebrija con problemas de baja condición corporal en verano.</div><div class="forum-tags"><span class="ftag">Nutrición</span><span class="ftag">Bovinos</span></div><div class="sc-footer" style="margin-top:8px;">Por María Castro · Hace 1 día · 5 respuestas</div></div></div>
+                <div class="forum-item"><div class="forum-votes"><button>▲</button><span class="fv-score">7</span><button>▼</button></div><div><div class="ftitle">Solicitud: canal de comunicación en tiempo real para el equipo de campo</div><div class="fdesc">Sería muy útil tener comunicación en tiempo real durante las visitas técnicas. ¿Alguien más lo ve necesario?</div><div class="forum-tags"><span class="ftag">Herramientas</span><span class="ftag">Comunicación</span></div><div class="sc-footer" style="margin-top:8px;">Por Jorge Morales · Hace 2 días · 12 respuestas</div></div></div>
+            </div>
+        </section>
+
+        <!-- ══ CALENDARIO ══ -->
+        <section class="section" id="sec-calendario">
+            <div class="page-title"><h2>Calendario Corporativo</h2><p>Eventos, reuniones y fechas importantes de Insumma Business Group</p></div>
+            <div class="cal-grid">
+                <div class="card">
+                    <div class="cal-header">
+                        <div class="cal-nav">
+                            <button id="prevMonth" title="Mes anterior">◀</button>
+                            <button id="nextMonth" title="Mes siguiente">▶</button>
+                        </div>
+                        <span class="cal-month" id="calMonth">Junio 2026</span>
+                        <button class="btn-primary" style="font-size:12px;padding:7px 14px;">+ Evento</button>
+                    </div>
+                    <div class="cal-days-hdr">
+                        <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
+                    </div>
+                    <div class="cal-days" id="calDays"></div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:16px;">
+                    <div class="card">
+                        <div class="card-header"><h3>📅 Próximos eventos</h3></div>
+                        <div class="widget-item"><div class="w-avatar" style="background:#F57C00;border-radius:8px;width:38px;height:38px;font-size:12px;">30</div><div><div class="w-name">Cierre comité bienestar</div><div class="w-sub">Jun 30 · 10:00 am</div></div></div>
+                        <div class="widget-item"><div class="w-avatar" style="background:#1565C0;border-radius:8px;width:38px;height:38px;font-size:12px;">04</div><div><div class="w-name">Capacitación bioseguridad Q2</div><div class="w-sub">Jul 04 · 8:00 am · Virtual</div></div></div>
+                        <div class="widget-item"><div class="w-avatar" style="background:#2E7D32;border-radius:8px;width:38px;height:38px;font-size:12px;">15</div><div><div class="w-name">Jornada de salud rural</div><div class="w-sub">Jul 15 · Campo Girón</div></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ EVENTOS ══ -->
+        <section class="section" id="sec-eventos">
+            <div class="page-title"><h2>Eventos</h2><p>Actividades corporativas, sociales y de formación</p></div>
+            <div class="section-grid">
+                <div class="sec-card"><span class="sc-tag" style="background:#E8F5E9;color:#2E7D32;">Formación</span><div class="sc-title">Capacitación: Bioseguridad Q2 2026</div><div class="sc-desc">Actualización de protocolos para todo el personal de campo y técnicos de planta. Modalidad virtual.</div><div class="sc-footer" style="margin-bottom:12px;">📅 4 de julio, 2026 · 8:00 am - 12:00 pm</div><button class="btn-primary" style="font-size:13px;padding:8px 18px;">Inscribirme</button></div>
+                <div class="sec-card"><span class="sc-tag" style="background:#FFF3E0;color:#F57C00;">Social</span><div class="sc-title">Celebración aniversario Insumma BG</div><div class="sc-desc">25 años de crecimiento conjunto. Celebración con todos los colaboradores, familias e invitados especiales. Sede Girón.</div><div class="sc-footer" style="margin-bottom:12px;">📅 12 de julio, 2026 · 4:00 pm</div><button class="btn-secondary" style="font-size:13px;padding:8px 18px;">Confirmar asistencia</button></div>
+                <div class="sec-card"><span class="sc-tag" style="background:#E3F2FD;color:#1565C0;">Técnico</span><div class="sc-title">Feria Agropecuaria Bucaramanga 2026</div><div class="sc-desc">Participación institucional. Se necesitan representantes técnicos por área para atender el stand de Insumma BG.</div><div class="sc-footer" style="margin-bottom:12px;">📅 20-23 agosto, 2026 · Bucaramanga</div><button class="btn-secondary" style="font-size:13px;padding:8px 18px;">Postularme</button></div>
+            </div>
+        </section>
+
+        <!-- ══ BUZÓN DE IDEAS ══ -->
+        <section class="section" id="sec-buzon">
+            <div class="page-title"><h2>Buzón de Ideas</h2><p>Tu opinión construye a Insumma Business Group. Todas las ideas son bienvenidas.</p></div>
+            <div class="idea-form">
+                <h3>💡 Enviar una idea</h3>
+                <div class="form-row"><label>Categoría</label><select><option>Selecciona una categoría…</option><option>Mejora de procesos</option><option>Ahorro de costos</option><option>Bienestar laboral</option><option>Innovación de producto</option><option>Seguridad y salud</option><option>Sostenibilidad</option><option>Otro</option></select></div>
+                <div class="form-row"><label>Título de la idea</label><input type="text" placeholder="Resume tu idea en una frase…"></div>
+                <div class="form-row"><label>Descripción</label><textarea placeholder="Cuéntanos tu idea con más detalle. ¿Qué problema resuelve? ¿Cómo se implementaría?"></textarea></div>
+                <div class="form-row"><label class="anon-row"><input type="checkbox"> Enviar de forma anónima</label></div>
+                <button class="btn-primary">Enviar idea</button>
+            </div>
+            <div class="card">
+                <div class="card-header"><h3>Ideas recientes de la comunidad</h3></div>
+                <div class="news-item"><div class="news-thumb ic-green">💡</div><div><div class="ni-title">Sistema de carpooling entre colaboradores de Girón</div><div class="ni-desc">Organizar rutas compartidas reduciría costos de transporte y la huella de carbono.</div><div class="ni-date">12 votos · Hace 3 días · Anónimo</div></div></div>
+                <div class="news-item"><div class="news-thumb ic-orange">♻️</div><div><div class="ni-title">Puntos de reciclaje diferenciado en todas las áreas</div><div class="ni-desc">Instalar puntos de separación de residuos en todas las áreas de trabajo de la planta.</div><div class="ni-date">8 votos · Hace 5 días · Laura Peña</div></div></div>
+            </div>
+        </section>
+
+        <!-- ══ SICREO ══ -->
+        <section class="section" id="sec-sicreo">
+            <div class="page-title"><h2>SICREO</h2><p>Sistema de Información Corporativo — Módulos y herramientas internas</p></div>
+            <div class="sicreo-grid">
+                <div class="sicreo-card"><div class="sicreo-icon ic-green"><svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><h4>Correspondencia</h4><p>Gestión de comunicaciones internas y externas</p></div>
+                <div class="sicreo-card"><div class="sicreo-icon ic-orange"><svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/><path d="M9 12h6M9 16h4"/></svg></div><h4>Requisiciones</h4><p>Solicitudes de compra y aprobación de pedidos</p></div>
+                <div class="sicreo-card"><div class="sicreo-icon ic-blue"><svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><h4>Inventario</h4><p>Control de stock y movimientos de almacén</p></div>
+                <div class="sicreo-card"><div class="sicreo-icon ic-purple"><svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div><h4>Reportes</h4><p>Generación de informes y estadísticas</p></div>
+                <div class="sicreo-card"><div class="sicreo-icon ic-teal"><svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><h4>Nómina</h4><p>Consulta de desprendibles y liquidaciones</p></div>
+                <div class="sicreo-card"><div class="sicreo-icon ic-red"><svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><h4>PQRS</h4><p>Peticiones, quejas, reclamos y sugerencias</p></div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script>
+    // Datos del usuario desde sessionStorage (guardados por el backend tras login)
+    const USER = {
+        name:     sessionStorage.getItem('ibg_name')     || 'Juan Díaz',
+        role:     sessionStorage.getItem('ibg_role')     || 'Colaborador',
+        initials: sessionStorage.getItem('ibg_initials') || 'JD'
+    };
+
+    document.getElementById('sbName').textContent     = USER.name;
+    document.getElementById('sbRole').textContent     = USER.role;
+    document.getElementById('sbInitials').textContent = USER.initials;
+    document.getElementById('hAvatar').textContent    = USER.initials;
+    document.getElementById('wName').textContent      = USER.name.split(' ')[0];
+
+    // Fecha actual en el banner
+    const now    = new Date();
+    const MESES  = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    document.getElementById('wDay').textContent  = now.getDate();
+    document.getElementById('wDate').textContent = `${MESES[now.getMonth()]} ${now.getFullYear()}`;
+
+    // Títulos del header por sección
+    const TITLES = {
+        inicio:          ['Inicio',                 'Portal Intranet Corporativo · Insumma Business Group'],
+        enterate:        ['Entérate',               'Noticias y comunicados corporativos'],
+        sumate:          ['Súmate',                 'Iniciativas y programas de participación'],
+        directorio:      ['Directorio Corporativo', 'Colaboradores de Insumma Business Group'],
+        reconocimientos: ['Reconocimientos',        'Logros y méritos del equipo'],
+        foro:            ['Foro Corporativo',       'Debates y conversaciones entre colaboradores'],
+        calendario:      ['Calendario Corporativo', 'Eventos y fechas importantes'],
+        eventos:         ['Eventos',                'Actividades corporativas y de formación'],
+        buzon:           ['Buzón de Ideas',         'Comparte tus propuestas de mejora'],
+        sicreo:          ['SICREO',                 'Sistema de Información Corporativo']
+    };
+
+    // Navegación entre secciones
+    function goTo(id) {
+        document.querySelectorAll('.section').forEach(s  => s.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+        const sec = document.getElementById(`sec-${id}`);
+        const nav = document.querySelector(`.nav-item[data-sec="${id}"]`);
+        if (sec) sec.classList.add('active');
+        if (nav) nav.classList.add('active');
+
+        const t = TITLES[id] || [id, ''];
+        document.getElementById('hTitle').textContent = t[0];
+        document.getElementById('hSub').textContent   = t[1];
+
+        closeSidebar();
+        window.scrollTo(0, 0);
+    }
+
+    document.querySelectorAll('.nav-item[data-sec]').forEach(btn =>
+        btn.addEventListener('click', () => goTo(btn.dataset.sec))
+    );
+
+    // Menú hamburguesa (móvil)
+    const sidebar   = document.getElementById('sidebar');
+    const overlay   = document.getElementById('overlay');
+    const hamburger = document.getElementById('hamburger');
+
+    function closeSidebar() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('open');
+    }
+
+    hamburger.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('open');
+    });
+
+    overlay.addEventListener('click', closeSidebar);
+
+    // Calendario
+    let calYear  = now.getFullYear();
+    let calMonth = now.getMonth();
+
+    const MESES_FULL = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    const EVENT_DAYS = [4, 15, 26, 30];
+
+    function buildCalendar() {
+        const container = document.getElementById('calDays');
+        container.innerHTML = '';
+        document.getElementById('calMonth').textContent = `${MESES_FULL[calMonth]} ${calYear}`;
+
+        const firstDay  = new Date(calYear, calMonth, 1).getDay();
+        const daysMonth = new Date(calYear, calMonth + 1, 0).getDate();
+        const prevDays  = new Date(calYear, calMonth, 0).getDate();
+
+        for (let i = firstDay - 1; i >= 0; i--) {
+            const d = document.createElement('div');
+            d.className = 'cal-day other-month';
+            d.textContent = prevDays - i;
+            container.appendChild(d);
+        }
+
+        for (let d = 1; d <= daysMonth; d++) {
+            const el = document.createElement('div');
+            el.className = 'cal-day';
+            el.textContent = d;
+            if (d === now.getDate() && calMonth === now.getMonth() && calYear === now.getFullYear())
+                el.classList.add('today');
+            if (EVENT_DAYS.includes(d))
+                el.classList.add('has-event');
+            container.appendChild(el);
+        }
+    }
+
+    buildCalendar();
+
+    document.getElementById('prevMonth').addEventListener('click', () => {
+        calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } buildCalendar();
+    });
+
+    document.getElementById('nextMonth').addEventListener('click', () => {
+        calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } buildCalendar();
+    });
+</script>
+
+</body>
+</html>
