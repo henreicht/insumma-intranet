@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Intranet Corporativa | Insumma Business Group</title>
     <style>
         :root {
@@ -407,23 +407,92 @@
             color: #B0BEC5;
         }
 
-        /* Responsive */
+        /* ══ RESPONSIVE ══ */
+
+        /* Tablet landscape */
+        @media (max-width: 1100px) {
+            .brand-panel { width: 42%; padding: 40px 36px; }
+            .brand-content h1 { font-size: 30px; }
+            .brand-content p  { font-size: 14px; }
+        }
+
+        /* Tablet portrait */
+        @media (max-width: 860px) {
+            .brand-panel { width: 38%; padding: 32px 28px; }
+            .brand-content h1 { font-size: 26px; }
+            .pill { padding: 5px 11px; font-size: 11px; }
+        }
+
+        /* Mobile — panel izquierdo se convierte en barra superior */
         @media (max-width: 768px) {
             body { flex-direction: column; }
 
             .brand-panel {
                 width: 100%;
                 min-height: auto;
-                padding: 28px 24px;
+                padding: 16px 22px;
                 flex-direction: row;
                 align-items: center;
-                justify-content: flex-start;
+                justify-content: space-between;
+                gap: 12px;
             }
+            .brand-panel::before,
+            .brand-panel::after { display: none; }
 
+            /* Ocultar contenido largo, mostrar solo logo */
             .brand-content, .brand-footer { display: none; }
-            .brand-panel::before, .brand-panel::after { display: none; }
 
-            .login-panel { padding: 36px 24px; }
+            /* Logo compacto */
+            .logo-icon { width: 40px; height: 40px; }
+            .logo-text .name { font-size: 18px; letter-spacing: 1.5px; }
+            .logo-text .sub  { font-size: 9px; }
+
+            /* Píldoras de unidades de negocio en fila horizontal */
+            .brand-pills-mobile {
+                display: flex !important;
+                gap: 8px;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scrollbar-width: none;
+            }
+            .brand-pills-mobile::-webkit-scrollbar { display: none; }
+
+            /* Panel login */
+            .login-panel {
+                padding: 28px 22px 40px;
+                justify-content: flex-start;
+                padding-top: 32px;
+            }
+            .login-box { max-width: 100%; }
+            .welcome h2 { font-size: 22px; }
+            .welcome p  { font-size: 13px; }
+        }
+
+        /* Teléfono pequeño */
+        @media (max-width: 480px) {
+            .brand-panel { padding: 14px 16px; }
+            .logo-icon { width: 34px; height: 34px; }
+            .logo-text .name { font-size: 16px; }
+            .logo-text .sub  { display: none; }
+
+            .login-panel { padding: 24px 16px 36px; }
+            .welcome h2 { font-size: 20px; }
+
+            .form-group { margin-bottom: 16px; }
+            .form-input  { padding: 13px 14px 13px 42px; font-size: 14px; min-height: 48px; }
+            .btn-login   { padding: 14px; font-size: 14px; min-height: 50px; }
+
+            .creds-box   { padding: 12px 14px; }
+            .creds-box p { font-size: 11px; }
+
+            .remember-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+        }
+
+        /* Teléfono muy pequeño */
+        @media (max-width: 360px) {
+            .login-panel { padding: 20px 14px 32px; }
+            .accent-bar  { margin-bottom: 20px; }
+            .form-input  { font-size: 13px; }
         }
     </style>
 </head>
@@ -466,6 +535,13 @@
             &copy; 2026 Insumma Business Group S.A.<br>
             Girón, Santander, Colombia &nbsp;·&nbsp;
             <a href="https://www.insumma.co" target="_blank" rel="noopener">www.insumma.co</a>
+        </div>
+
+        <!-- Unidades visibles solo en móvil (barra superior) -->
+        <div class="brand-pills-mobile" style="display:none;">
+            <div class="pill"><span class="pill-dot orange"></span>Salud Animal</div>
+            <div class="pill"><span class="pill-dot blue"></span>Nutrición</div>
+            <div class="pill"><span class="pill-dot white"></span>Intranet</div>
         </div>
 
     </div>
