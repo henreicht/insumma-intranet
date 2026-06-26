@@ -1726,132 +1726,33 @@
     });
 
     // ══════════════════════════════════════
-    // ── ENTÉRATE — imágenes SVG de prueba ──
+    // ── ENTÉRATE — fotos reales (Unsplash)
+    //    Directorio: assets/img/noticias/ y assets/img/comunicados/
     // ══════════════════════════════════════
-    function svgImg(c1, c2, iconPaths, label, sub) {
-        const dec = `<circle cx="680" cy="55" r="140" fill="rgba(255,255,255,.055)"/>
-                     <circle cx="750" cy="390" r="100" fill="rgba(255,255,255,.04)"/>
-                     <circle cx="70"  cy="330" r="120" fill="rgba(255,255,255,.05)"/>`;
-        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420">
-          <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/>
-          </linearGradient></defs>
-          <rect width="800" height="420" fill="url(#bg)"/>${dec}
-          ${iconPaths}
-          <text x="400" y="365" font-family="'Segoe UI',Arial,sans-serif" font-size="21" font-weight="700" fill="white" text-anchor="middle">${label}</text>
-          <text x="400" y="393" font-family="'Segoe UI',Arial,sans-serif" font-size="13" fill="rgba(255,255,255,.72)" text-anchor="middle">${sub}</text>
-        </svg>`;
-        return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-    }
-
-    const IC = {
-        heart: `<circle cx="280" cy="165" r="26" fill="rgba(255,255,255,.18)"/>
-                <circle cx="280" cy="145" r="14" fill="white"/>
-                <ellipse cx="280" cy="177" rx="20" ry="16" fill="white"/>
-                <circle cx="340" cy="165" r="26" fill="rgba(255,255,255,.18)"/>
-                <circle cx="340" cy="145" r="14" fill="white"/>
-                <ellipse cx="340" cy="177" rx="20" ry="16" fill="white"/>
-                <circle cx="400" cy="165" r="26" fill="rgba(255,255,255,.18)"/>
-                <circle cx="400" cy="145" r="14" fill="white"/>
-                <ellipse cx="400" cy="177" rx="20" ry="16" fill="white"/>
-                <circle cx="460" cy="165" r="26" fill="rgba(255,255,255,.18)"/>
-                <circle cx="460" cy="145" r="14" fill="white"/>
-                <ellipse cx="460" cy="177" rx="20" ry="16" fill="white"/>
-                <circle cx="520" cy="165" r="26" fill="rgba(255,255,255,.18)"/>
-                <circle cx="520" cy="145" r="14" fill="white"/>
-                <ellipse cx="520" cy="177" rx="20" ry="16" fill="white"/>
-                <path d="M400 290 C400 290 310 240 310 195 C310 170 330 150 355 160 C370 166 400 185 400 185 C400 185 430 166 445 160 C470 150 490 170 490 195 C490 240 400 290 400 290Z" fill="rgba(255,255,255,.88)"/>`,
-
-        chart: `<rect x="260" y="230" width="42" height="85"  rx="5" fill="rgba(255,255,255,.55)"/>
-                <rect x="316" y="190" width="42" height="125" rx="5" fill="rgba(255,255,255,.70)"/>
-                <rect x="372" y="155" width="42" height="160" rx="5" fill="rgba(255,255,255,.85)"/>
-                <rect x="428" y="120" width="42" height="195" rx="5" fill="white"/>
-                <rect x="484" y="145" width="42" height="170" rx="5" fill="rgba(255,255,255,.80)"/>
-                <polyline points="281,230 337,192 393,157 449,122 505,147" stroke="rgba(255,255,255,.6)" stroke-width="3" fill="none" stroke-dasharray="6 3"/>
-                <polygon points="505,125 525,148 492,155" fill="rgba(255,255,255,.7)"/>`,
-
-        book:  `<rect x="310" y="130" width="80" height="115" rx="6" fill="rgba(255,255,255,.5)" transform="rotate(-8,310,130)"/>
-                <rect x="320" y="125" width="165" height="155" rx="8" fill="white"/>
-                <rect x="320" y="125" width="8"   height="155" fill="rgba(0,0,0,.08)"/>
-                <rect x="338" y="148" width="110" height="6"  rx="3" fill="rgba(30,80,150,.25)"/>
-                <rect x="338" y="163" width="110" height="6"  rx="3" fill="rgba(30,80,150,.25)"/>
-                <rect x="338" y="178" width="90"  height="6"  rx="3" fill="rgba(30,80,150,.25)"/>
-                <rect x="338" y="193" width="110" height="6"  rx="3" fill="rgba(30,80,150,.25)"/>
-                <rect x="338" y="208" width="70"  height="6"  rx="3" fill="rgba(30,80,150,.25)"/>
-                <polygon points="400,108 430,140 370,140" fill="rgba(255,255,255,.85)"/>
-                <ellipse cx="400" cy="107" rx="26" ry="10" fill="rgba(255,255,255,.8)"/>`,
-
-        leaf:  `<path d="M400 315 C400 315 270 270 290 145 C330 125 420 130 465 200 C495 245 465 315 400 315Z" fill="rgba(255,255,255,.85)"/>
-                <line x1="400" y1="315" x2="388" y2="148" stroke="rgba(255,255,255,.45)" stroke-width="3"/>
-                <path d="M390 210 Q340 195 330 175" stroke="rgba(255,255,255,.35)" stroke-width="2" fill="none"/>
-                <path d="M395 245 Q355 235 342 210" stroke="rgba(255,255,255,.35)" stroke-width="2" fill="none"/>
-                <circle cx="540" cy="190" r="55" fill="rgba(255,255,255,.12)"/>
-                <path d="M520 175 C540 155 565 160 565 180 C565 200 545 220 520 230 C520 230 510 205 520 175Z" fill="rgba(255,255,255,.5)"/>`,
-
-        shield:`<path d="M400 120 L475 152 L475 220 C475 268 400 305 400 305 C400 305 325 268 325 220 L325 152 Z" fill="rgba(255,255,255,.88)"/>
-                <polyline points="370,210 392,232 435,183" stroke="#E53935" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`,
-
-        building:`<rect x="330" y="125" width="140" height="190" fill="rgba(255,255,255,.85)" rx="4"/>
-                  <rect x="380" y="240" width="40" height="75" fill="rgba(30,80,150,.4)" rx="3"/>
-                  <rect x="345" y="140" width="24" height="22" rx="3" fill="rgba(30,80,150,.4)"/>
-                  <rect x="381" y="140" width="24" height="22" rx="3" fill="rgba(30,80,150,.4)"/>
-                  <rect x="417" y="140" width="24" height="22" rx="3" fill="rgba(30,80,150,.4)"/>
-                  <rect x="345" y="175" width="24" height="22" rx="3" fill="rgba(30,80,150,.4)"/>
-                  <rect x="381" y="175" width="24" height="22" rx="3" fill="rgba(30,80,150,.4)"/>
-                  <rect x="417" y="175" width="24" height="22" rx="3" fill="rgba(30,80,150,.4)"/>
-                  <rect x="345" y="210" width="24" height="22" rx="3" fill="rgba(30,80,150,.4)"/>
-                  <rect x="417" y="210" width="24" height="22" rx="3" fill="rgba(30,80,150,.4)"/>
-                  <polygon points="320,125 400,80 480,125" fill="rgba(255,255,255,.6)"/>`,
-
-        trophy:`<path d="M355 120 L355 210 C355 245 400 265 400 265 C400 265 445 245 445 210 L445 120 Z" fill="rgba(255,255,255,.88)"/>
-                <rect x="280" y="118" width="60" height="14" rx="6" fill="rgba(255,255,255,.6)"/>
-                <path d="M280 132 C270 132 255 145 255 165 C255 190 278 205 310 200" stroke="rgba(255,255,255,.65)" stroke-width="12" fill="none" stroke-linecap="round"/>
-                <rect x="460" y="118" width="60" height="14" rx="6" fill="rgba(255,255,255,.6)"/>
-                <path d="M520 132 C530 132 545 145 545 165 C545 190 522 205 490 200" stroke="rgba(255,255,255,.65)" stroke-width="12" fill="none" stroke-linecap="round"/>
-                <rect x="378" y="265" width="44" height="18" rx="6" fill="rgba(255,255,255,.6)"/>
-                <rect x="358" y="283" width="84" height="16" rx="6" fill="rgba(255,255,255,.75)"/>
-                <polygon points="400,143 407,163 430,163 412,175 419,195 400,183 381,195 388,175 370,163 393,163" fill="rgba(255,200,50,.9)"/>`
-    };
-
-    // ── Imágenes de prueba asignadas a cada artículo ──
     const ET_IMGS = {
-        bien1: svgImg('#1B5E20','#4CAF50', IC.heart,    'Bienestar Laboral 2026',          'Nuevos beneficios para colaboradores'),
-        bien2: svgImg('#2E7D32','#81C784', IC.trophy,   'Plan de Bienestar Integral',      'Jornadas flexibles y salud mental'),
-        bien2b: svgImg('#388E3C','#A5D6A7', `<text x="400" y="215" font-size="120" text-anchor="middle" font-family="serif" fill="rgba(255,255,255,.85)">🧘</text>`,
-                       'Actividades de bienestar',       'Yoga, meditación y deporte'),
-
-        res1: svgImg('#E65100','#FF9800', IC.chart,    'Resultados Q1 · 2026',            'Crecimiento superior al objetivo'),
-        res2: svgImg('#BF360C','#FF7043', IC.trophy,   '¡Metas superadas!',               'Salud Animal +18 % · Nutrición +12 %'),
-
-        cap1: svgImg('#0D47A1','#42A5F5', IC.book,     'Capacitación Q2 · 2026',          'Bioseguridad y nutrición animal'),
-        cap2: svgImg('#1565C0','#64B5F6', IC.building, 'Sede Girón — Auditorio principal', 'Presencial y virtual disponible'),
-        cap3: svgImg('#283593','#7986CB', `<rect x="320" y="138" width="160" height="120" rx="10" fill="rgba(255,255,255,.88)"/>
-                     <text x="400" y="190" font-size="32" font-family="'Segoe UI',Arial" fill="#283593" font-weight="700" text-anchor="middle">CERT</text>
-                     <text x="400" y="220" font-size="14" font-family="Arial" fill="#546E7A" text-anchor="middle">Insumma Business Group</text>
-                     <line x1="345" y1="238" x2="455" y2="238" stroke="rgba(255,255,255,.5)" stroke-width="2"/>`,
-                     'Certificación interna', 'Válida para toda la organización'),
-
-        rec1: svgImg('#00695C','#26A69A', IC.leaf,     'Programa de Reciclaje — Fase II', 'Gestión ambiental en todas las sedes'),
-        rec2: svgImg('#1B5E20','#66BB6A', `<circle cx="400" cy="195" r="80" fill="rgba(255,255,255,.15)"/>
-                     <path d="M400 155 A40 40 0 0 1 440 195" stroke="white" stroke-width="14" fill="none" stroke-linecap="round"/>
-                     <polygon points="440,170 455,200 425,200" fill="white"/>
-                     <path d="M440 195 A40 40 0 0 1 380 228" stroke="white" stroke-width="14" fill="none" stroke-linecap="round"/>
-                     <polygon points="365,215 360,248 392,240" fill="white"/>
-                     <path d="M380 228 A40 40 0 0 1 400 155" stroke="white" stroke-width="14" fill="none" stroke-linecap="round"/>
-                     <polygon points="395,132 416,152 380,158" fill="white"/>`,
-                     'Reciclar es responsabilidad de todos', 'Únete al programa ambiental IBG'),
-
-        seg1: svgImg('#B71C1C','#F44336', IC.shield,   'Seguridad Industrial',            'Protocolo actualizado 2026'),
-        seg2: svgImg('#880E4F','#EC407A', `<text x="400" y="220" font-size="110" text-anchor="middle" font-family="serif" fill="rgba(255,255,255,.85)">⚠️</text>`,
-                     'Nuevas normas de EPP',               'Uso obligatorio en áreas de producción'),
-
-        reu1: svgImg('#1A237E','#3949AB', IC.building, 'Reunión de Junta Directiva',      'Junio 2026 — Girón, Santander'),
-        reu2: svgImg('#37474F','#78909C', IC.trophy,   'Resultados y proyecciones 2026',  'Informe presentado a la junta'),
-
-        prod1: svgImg('#4A148C','#9C27B0', `<ellipse cx="400" cy="195" rx="90" ry="60" fill="rgba(255,255,255,.85)"/>
-                      <text x="400" y="205" font-size="28" font-weight="700" text-anchor="middle" font-family="'Segoe UI',Arial" fill="#4A148C">NUEVO</text>`,
-                      'Lanzamiento línea Proteínas Max',  'Nutrición animal de alta performance'),
-        prod2: svgImg('#6A1B9A','#CE93D8', IC.chart,   'Proyección de ventas 2026',       'Línea premium en expansión')
+        // Bienestar laboral
+        bien1:  'assets/img/noticias/bien-1.jpg',
+        bien2:  'assets/img/noticias/bien-2.jpg',
+        bien3:  'assets/img/noticias/bien-3.jpg',
+        // Resultados Q1
+        res1:   'assets/img/noticias/res-1.jpg',
+        res2:   'assets/img/noticias/res-2.jpg',
+        // Capacitación
+        cap1:   'assets/img/noticias/cap-1.jpg',
+        cap2:   'assets/img/noticias/cap-2.jpg',
+        cap3:   'assets/img/noticias/cap-3.jpg',
+        // Reciclaje
+        rec1:   'assets/img/noticias/rec-1.jpg',
+        rec2:   'assets/img/noticias/rec-2.jpg',
+        // Seguridad
+        seg1:   'assets/img/comunicados/seg-1.jpg',
+        seg2:   'assets/img/comunicados/seg-2.jpg',
+        // Reunión directiva
+        reu1:   'assets/img/comunicados/reu-1.jpg',
+        reu2:   'assets/img/comunicados/reu-2.jpg',
+        // Producto
+        prod1:  'assets/img/comunicados/prod-1.jpg',
+        prod2:  'assets/img/comunicados/prod-2.jpg',
     };
 
     // ── Datos de artículos ──
@@ -1862,7 +1763,7 @@
             title: 'Nueva política de bienestar laboral 2026',
             excerpt: 'Conoce los cambios en los beneficios para todos los colaboradores. Se implementan nuevas jornadas flexibles y apoyo en salud mental.',
             date: 'Hace 2 horas', author: 'Recursos Humanos',
-            imgs: ['bien1','bien2','bien2b'],
+            imgs: ['bien1','bien2','bien3'],
             body: `<p><strong>Insumma Business Group</strong> anuncia una renovación integral de su política de bienestar laboral, efectiva a partir del 1 de julio de 2026. Esta iniciativa responde a la encuesta de clima organizacional realizada en marzo, donde el 78 % de los colaboradores expresó su interés en mayor flexibilidad.</p>
                    <p><strong>Principales cambios:</strong></p>
                    <p>🕐 <strong>Jornadas flexibles</strong> — Posibilidad de iniciar la jornada entre 7:00 a.m. y 9:00 a.m. según acuerdo con el jefe inmediato.</p>
