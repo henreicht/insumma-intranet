@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de Sesión | Panel de Control</title>
+    <title>Intranet Corporativa | Insumma Business Group</title>
     <style>
         :root {
-            --bg-color: #f4f7f5;
-            --card-bg: #ffffff;
-            --text-main: #2d3748;
-            --text-muted: #718096;
-            --primary-green: #2e7d32;
-            --primary-hover: #1b5e20;
-            --accent-orange: #f57c00;
-            --accent-hover: #e65100;
-            --border-color: #e2e8f0;
+            --green-dark:   #1B5E20;
+            --green-main:   #2E7D32;
+            --green-mid:    #388E3C;
+            --green-light:  #C8E6C9;
+            --orange-main:  #F57C00;
+            --orange-hover: #E65100;
+            --blue-main:    #1565C0;
+            --blue-light:   #BBDEFB;
+            --white:        #FFFFFF;
+            --gray-bg:      #F4F6F8;
+            --gray-border:  #DDE3E9;
+            --gray-text:    #546E7A;
+            --dark-text:    #1C2B2D;
         }
 
         * {
@@ -25,176 +29,630 @@
         }
 
         body {
-            background-color: var(--bg-color);
-            background-image: linear-gradient(135deg, #e8f5e9 0%, #f4f7f5 100%);
             display: flex;
+            min-height: 100vh;
+            background-color: var(--gray-bg);
+        }
+
+        /* ── Panel izquierdo (branding) ── */
+        .brand-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 45%;
+            min-height: 100vh;
+            background: linear-gradient(160deg, var(--green-dark) 0%, var(--green-main) 55%, var(--green-mid) 100%);
+            padding: 48px 52px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-panel::before {
+            content: '';
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.04);
+            top: -80px;
+            right: -100px;
+        }
+
+        .brand-panel::after {
+            content: '';
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            bottom: 60px;
+            left: -80px;
+        }
+
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            z-index: 1;
+        }
+
+        .logo-icon {
+            width: 54px;
+            height: 54px;
+            flex-shrink: 0;
+        }
+
+        .logo-text .name {
+            display: block;
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+
+        .logo-text .sub {
+            display: block;
+            font-size: 10.5px;
+            font-weight: 400;
+            color: var(--green-light);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .brand-content {
+            z-index: 1;
+        }
+
+        .brand-content h1 {
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.2;
+            margin-bottom: 18px;
+        }
+
+        .brand-content h1 span { color: var(--orange-main); }
+
+        .brand-content p {
+            font-size: 15px;
+            color: rgba(255,255,255,0.78);
+            line-height: 1.7;
+            max-width: 340px;
+            margin-bottom: 36px;
+        }
+
+        .brand-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pill {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 12px;
+            color: var(--white);
+        }
+
+        .pill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .pill-dot.orange { background: var(--orange-main); }
+        .pill-dot.blue   { background: #64B5F6; }
+        .pill-dot.white  { background: rgba(255,255,255,0.7); }
+
+        .brand-footer {
+            z-index: 1;
+            font-size: 12px;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.8;
+        }
+
+        .brand-footer a {
+            color: var(--green-light);
+            text-decoration: none;
+        }
+
+        /* ── Panel derecho (formulario) ── */
+        .login-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            padding: 48px 40px;
+            background: var(--white);
         }
 
-        .login-container {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(46, 125, 50, 0.08);
+        .login-box {
             width: 100%;
-            max-width: 420px;
-            border-top: 5px solid var(--primary-green);
+            max-width: 400px;
         }
 
-        .login-header {
-            text-align: center;
-            margin-bottom: 30px;
+        .welcome {
+            margin-bottom: 20px;
         }
 
-        .login-header h2 {
-            color: var(--text-main);
-            font-size: 24px;
+        .welcome h2 {
+            font-size: 26px;
             font-weight: 700;
-            margin-bottom: 8px;
+            color: var(--dark-text);
+            margin-bottom: 6px;
         }
 
-        .login-header p {
-            color: var(--text-muted);
+        .welcome p {
             font-size: 14px;
+            color: var(--gray-text);
         }
 
+        .accent-bar {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 28px;
+        }
+
+        .accent-bar span {
+            height: 4px;
+            border-radius: 4px;
+        }
+
+        .accent-bar .g { background: var(--green-main); flex: 3; }
+        .accent-bar .o { background: var(--orange-main); flex: 1; }
+        .accent-bar .b { background: var(--blue-main); flex: 1; }
+
+        /* Alerta de error */
+        .alert {
+            display: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            align-items: center;
+            gap: 10px;
+            background: #FFEBEE;
+            color: #C62828;
+            border-left: 4px solid #E53935;
+        }
+
+        .alert.visible { display: flex; }
+
+        /* Campos del formulario */
         .form-group {
             margin-bottom: 20px;
-            position: relative;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            color: var(--text-main);
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 7px;
         }
 
-        .form-group input {
+        .input-wrap {
+            position: relative;
+        }
+
+        .input-wrap .icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #90A4AE;
+            pointer-events: none;
+        }
+
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .form-group input[type="text"] {
             width: 100%;
-            padding: 12px 16px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 15px;
-            transition: all 0.3s ease;
+            padding: 12px 44px;
+            border: 1.5px solid var(--gray-border);
+            border-radius: 9px;
+            font-size: 14px;
+            background: var(--gray-bg);
+            color: var(--dark-text);
             outline: none;
-            background-color: #fafafa;
+            transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
         }
 
         .form-group input:focus {
-            border-color: var(--primary-green);
-            background-color: #fff;
-            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+            border-color: var(--green-main);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(46,125,50,0.12);
         }
+
+        .toggle-pass {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #90A4AE;
+            background: none;
+            border: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .toggle-pass:hover { color: var(--green-main); }
 
         .form-options {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            font-size: 14px;
+            margin-bottom: 24px;
+            font-size: 13px;
         }
 
         .remember-me {
             display: flex;
             align-items: center;
-            color: var(--text-muted);
+            gap: 8px;
+            cursor: pointer;
+            color: var(--gray-text);
+            user-select: none;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 15px;
+            height: 15px;
+            accent-color: var(--green-main);
             cursor: pointer;
         }
 
-        .remember-me input {
-            margin-right: 8px;
-            accent-color: var(--primary-green);
-        }
-
-        .forgot-password {
-            color: var(--accent-orange);
+        .forgot-link {
+            color: var(--blue-main);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.2s ease;
+            transition: color 0.2s;
         }
 
-        .forgot-password:hover {
-            color: var(--accent-hover);
+        .forgot-link:hover {
+            color: var(--orange-main);
             text-decoration: underline;
         }
 
+        /* Botón */
         .btn-login {
             width: 100%;
             padding: 14px;
-            background-color: var(--primary-green);
-            color: white;
+            background: linear-gradient(135deg, var(--green-main), var(--green-mid));
+            color: var(--white);
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 9px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.2);
+            transition: opacity 0.2s, transform 0.1s;
+            box-shadow: 0 4px 14px rgba(46,125,50,0.28);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
         }
 
-        .btn-login:hover {
-            background-color: var(--primary-hover);
+        .btn-login:hover  { opacity: 0.92; }
+        .btn-login:active { transform: scale(0.98); }
+        .btn-login:disabled { opacity: 0.7; cursor: not-allowed; }
+        .btn-login.loading .btn-text { visibility: hidden; }
+
+        .spinner {
+            display: none;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2.5px solid rgba(255,255,255,0.35);
+            border-top-color: var(--white);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
         }
 
-        .btn-login:active {
-            transform: scale(0.98);
+        .btn-login.loading .spinner { display: block; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 24px 0;
+            color: #B0BEC5;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--gray-border);
         }
 
         .login-footer {
             text-align: center;
-            margin-top: 25px;
-            font-size: 14px;
-            color: var(--text-muted);
+            font-size: 13px;
+            color: var(--gray-text);
         }
 
         .login-footer a {
-            color: var(--primary-green);
+            color: var(--orange-main);
             text-decoration: none;
             font-weight: 600;
         }
 
-        .login-footer a:hover {
-            text-decoration: underline;
+        .login-footer a:hover { text-decoration: underline; }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 28px;
+            font-size: 11px;
+            color: #B0BEC5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+
+            .brand-panel {
+                width: 100%;
+                min-height: auto;
+                padding: 28px 24px;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+            }
+
+            .brand-content, .brand-footer { display: none; }
+            .brand-panel::before, .brand-panel::after { display: none; }
+
+            .login-panel { padding: 36px 24px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="login-container">
-        <div class="login-header">
-            <h2>Bienvenido de nuevo</h2>
-            <p>Ingresa tus credenciales para acceder</p>
+    <!-- ── Panel de Marca ── -->
+    <div class="brand-panel">
+
+        <div class="logo-wrap">
+            <!-- SVG placeholder — reemplazar con <img src="assets/logo-insumma.png"> cuando esté disponible -->
+            <svg class="logo-icon" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="54" height="54" rx="13" fill="rgba(255,255,255,0.12)"/>
+                <circle cx="19" cy="15" r="5" fill="#F57C00"/>
+                <circle cx="35" cy="15" r="5" fill="#64B5F6"/>
+                <text x="7" y="43" font-family="Segoe UI, sans-serif" font-weight="900"
+                      font-size="19" fill="white" letter-spacing="1">IBG</text>
+            </svg>
+            <div class="logo-text">
+                <span class="name">INSUMMA</span>
+                <span class="sub">Business Group S.A.</span>
+            </div>
         </div>
 
-        <form action="#" method="POST">
-            <div class="form-group">
-                <label for="email">Correo Electrónico</label>
-                <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
+        <div class="brand-content">
+            <h1>Portal<br><span>Intranet</span><br>Corporativo</h1>
+            <p>
+                Plataforma interna para colaboradores de Insumma Business Group.
+                Gestiona correspondencia, requisiciones, inventario y más desde un solo lugar.
+            </p>
+            <div class="brand-pills">
+                <div class="pill"><span class="pill-dot orange"></span>Salud Animal</div>
+                <div class="pill"><span class="pill-dot blue"></span>Bioseguridad</div>
+                <div class="pill"><span class="pill-dot white"></span>Nutrición</div>
+                <div class="pill"><span class="pill-dot orange"></span>Metalmecánica</div>
+                <div class="pill"><span class="pill-dot blue"></span>Equipos</div>
+            </div>
+        </div>
+
+        <div class="brand-footer">
+            &copy; 2026 Insumma Business Group S.A.<br>
+            Girón, Santander, Colombia &nbsp;·&nbsp;
+            <a href="https://www.insumma.co" target="_blank" rel="noopener">www.insumma.co</a>
+        </div>
+
+    </div>
+
+    <!-- ── Panel de Login ── -->
+    <div class="login-panel">
+        <div class="login-box">
+
+            <div class="welcome">
+                <h2>Bienvenido de nuevo</h2>
+                <p>Ingresa tus credenciales para acceder al sistema</p>
             </div>
 
-            <div class="form-group">
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" placeholder="••••••••" required>
+            <div class="accent-bar">
+                <span class="g"></span>
+                <span class="o"></span>
+                <span class="b"></span>
             </div>
 
-            <div class="form-options">
-                <label class="remember-me">
-                    <input type="checkbox" name="remember"> Recordar dispositivo
-                </label>
-                <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+            <!-- Alerta de error — se activa desde JS -->
+            <div class="alert" id="alertError" role="alert">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <span id="alertMsg">Credenciales incorrectas. Verifica tu usuario y contraseña.</span>
             </div>
 
-            <button type="submit" class="btn-login">Iniciar Sesión</button>
-        </form>
+            <!--
+                CONEXIÓN AL BACKEND:
+                  PHP/Laravel  → action="auth/login.php"
+                  Node/Express → action="/api/auth/login"
+                  Django       → action="/accounts/login/"
+                La respuesta JSON esperada: { "success": true, "redirect": "/dashboard/" }
+                                        o   { "success": false, "error": "Mensaje de error" }
+            -->
+            <form id="loginForm" action="auth/login.php" method="POST" novalidate>
 
-        <div class="login-footer">
-            <p>¿Necesitas soporte técnico? <a href="#">Contactar soporte</a></p>
+                <div class="form-group">
+                    <label for="email">Correo electrónico corporativo</label>
+                    <div class="input-wrap">
+                        <svg class="icon" width="18" height="18" fill="none"
+                             viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                            <polyline points="2,4 12,13 22,4"/>
+                        </svg>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="usuario@insumma.co"
+                            autocomplete="username"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <div class="input-wrap">
+                        <svg class="icon" width="18" height="18" fill="none"
+                             viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                            <rect x="3" y="11" width="18" height="11" rx="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="••••••••"
+                            autocomplete="current-password"
+                            required
+                        >
+                        <button type="button" class="toggle-pass" id="togglePass" aria-label="Mostrar contraseña">
+                            <svg id="eyeIcon" width="18" height="18" fill="none"
+                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember" id="remember">
+                        Recordar este dispositivo
+                    </label>
+                    <a href="auth/forgot-password.php" class="forgot-link">¿Olvidaste tu contraseña?</a>
+                </div>
+
+                <button type="submit" class="btn-login" id="btnLogin">
+                    <div class="spinner"></div>
+                    <span class="btn-text">Iniciar Sesión</span>
+                </button>
+
+            </form>
+
+            <div class="divider">acceso restringido a colaboradores</div>
+
+            <div class="login-footer">
+                ¿Problemas para ingresar?
+                <a href="mailto:soporte@insumma.co">Contactar soporte TI</a>
+            </div>
+
+            <div class="security-badge">
+                <svg width="13" height="13" fill="none" viewBox="0 0 24 24"
+                     stroke="var(--green-main)" stroke-width="2">
+                    <path d="M12 2l7 4v6c0 5-3.5 9.7-7 11C8.5 21.7 5 17 5 12V6l7-4z"/>
+                </svg>
+                Conexión cifrada · Acceso protegido
+            </div>
+
         </div>
     </div>
+
+    <script>
+        // Toggle visibilidad de contraseña
+        const togglePass = document.getElementById('togglePass');
+        const passInput  = document.getElementById('password');
+        const eyeIcon    = document.getElementById('eyeIcon');
+
+        const EYE_OPEN = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
+        const EYE_OFF  = `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                          <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                          <line x1="1" y1="1" x2="23" y2="23"/>`;
+
+        togglePass.addEventListener('click', () => {
+            const show = passInput.type === 'password';
+            passInput.type    = show ? 'text' : 'password';
+            eyeIcon.innerHTML = show ? EYE_OFF : EYE_OPEN;
+            togglePass.setAttribute('aria-label', show ? 'Ocultar contraseña' : 'Mostrar contraseña');
+        });
+
+        // Envío del formulario (AJAX)
+        const loginForm  = document.getElementById('loginForm');
+        const btnLogin   = document.getElementById('btnLogin');
+        const alertError = document.getElementById('alertError');
+        const alertMsg   = document.getElementById('alertMsg');
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            alertError.classList.remove('visible');
+
+            const email    = document.getElementById('email').value.trim();
+            const password = passInput.value;
+
+            if (!email || !password) {
+                alertMsg.textContent = 'Por favor completa todos los campos.';
+                alertError.classList.add('visible');
+                return;
+            }
+
+            btnLogin.classList.add('loading');
+            btnLogin.disabled = true;
+
+            try {
+                const res  = await fetch(loginForm.action, {
+                    method:  'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body:    JSON.stringify({
+                        email,
+                        password,
+                        remember: document.getElementById('remember').checked
+                    })
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    window.location.href = data.redirect || 'dashboard/index.html';
+                } else {
+                    alertMsg.textContent = data.error || 'Credenciales incorrectas.';
+                    alertError.classList.add('visible');
+                    passInput.value = '';
+                    passInput.focus();
+                }
+            } catch {
+                alertMsg.textContent = 'No se pudo conectar al servidor. Intenta de nuevo.';
+                alertError.classList.add('visible');
+            } finally {
+                btnLogin.classList.remove('loading');
+                btnLogin.disabled = false;
+            }
+        });
+    </script>
 
 </body>
 </html>
