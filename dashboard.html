@@ -1301,11 +1301,7 @@
         <!-- ══ RECONOCIMIENTOS ══ -->
         <section class="section" id="sec-reconocimientos">
             <div class="page-title"><h2>Reconocimientos</h2><p>Celebramos los logros y el compromiso de nuestros colaboradores</p></div>
-            <div class="section-grid">
-                <div class="sec-card" style="border-left:4px solid #F57C00;"><span class="sc-tag" style="background:#FFF3E0;color:#F57C00;">⭐ MVP del Mes</span><div class="sc-title">Laura Peña — Bioseguridad</div><div class="sc-desc">Por liderar la implementación del nuevo protocolo de bioseguridad en planta, reduciendo incidentes en un 40%.</div><div class="sc-footer" style="margin-top:10px;gap:8px;"><div class="w-avatar" style="width:26px;height:26px;border-radius:50%;background:#2E7D32;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">SR</div>Nominado por Sandra Ruiz · Jun 2026</div></div>
-                <div class="sec-card" style="border-left:4px solid #1565C0;"><span class="sc-tag" style="background:#E3F2FD;color:#1565C0;">🤝 Trabajo en Equipo</span><div class="sc-title">Equipo Comercial Zona Norte</div><div class="sc-desc">Por superar la meta de ventas Q1 en un 18% gracias a la sinergia y trabajo conjunto de todo el equipo en campo.</div><div class="sc-footer" style="margin-top:10px;gap:8px;"><div class="w-avatar" style="width:26px;height:26px;border-radius:50%;background:#F57C00;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">GG</div>Gerencia General · Jun 2026</div></div>
-                <div class="sec-card" style="border-left:4px solid #2E7D32;"><span class="sc-tag" style="background:#E8F5E9;color:#2E7D32;">💡 Innovación</span><div class="sc-title">Roberto Pardo — Metalmecánica</div><div class="sc-desc">Por diseñar una solución que optimizó el proceso de producción de equipos, ahorrando 15 horas semanales de operación.</div><div class="sc-footer" style="margin-top:10px;gap:8px;"><div class="w-avatar" style="width:26px;height:26px;border-radius:50%;background:#1565C0;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">JD</div>Dir. de Producción · May 2026</div></div>
-            </div>
+            <div class="et-grid" id="rc-recon-grid"></div>
         </section>
 
         <!-- ══ FORO ══ -->
@@ -2000,6 +1996,16 @@
         // Producto
         prod1:  'assets/img/comunicados/prod-1.jpg',
         prod2:  'assets/img/comunicados/prod-2.jpg',
+        // Reconocimientos
+        mvp1:    'assets/img/reconocimientos/mvp-1.jpg',
+        mvp2:    'assets/img/reconocimientos/mvp-2.jpg',
+        mvp3:    'assets/img/reconocimientos/mvp-3.jpg',
+        equipo1: 'assets/img/reconocimientos/equipo-1.jpg',
+        equipo2: 'assets/img/reconocimientos/equipo-2.jpg',
+        equipo3: 'assets/img/reconocimientos/equipo-3.jpg',
+        innov1:  'assets/img/reconocimientos/innov-1.jpg',
+        innov2:  'assets/img/reconocimientos/innov-2.jpg',
+        innov3:  'assets/img/reconocimientos/innov-3.jpg',
         // Eventos corporativos
         bio1:   'assets/img/eventos/bio-1.jpg',
         bio2:   'assets/img/eventos/bio-2.jpg',
@@ -2177,6 +2183,94 @@
         document.getElementById('et-comunicados-wrap').style.display = name === 'comunicados' ? '' : 'none';
     }
 
+    // ── Datos de Reconocimientos ──
+    const RC_RECONOCIMIENTOS = [
+        {
+            id: 30, type: 'reconocimientos',
+            tag: '⭐ MVP del Mes', tagBg: '#FFF3E0', tagColor: '#E65100',
+            title: 'Laura Peña — Bioseguridad · Junio 2026',
+            excerpt: 'Por liderar la implementación del nuevo protocolo de bioseguridad en planta, reduciendo incidentes en un 40 % en solo tres meses.',
+            date: 'Jun 2026', author: 'Nominado por Sandra Ruiz',
+            imgs: ['mvp1','mvp2','mvp3'],
+            body: `<div style="display:flex;align-items:center;gap:14px;background:#FFF3E0;border-radius:12px;padding:16px 20px;margin-bottom:20px;">
+                       <div style="width:54px;height:54px;border-radius:50%;background:#E65100;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;flex-shrink:0;">LP</div>
+                       <div>
+                           <div style="font-size:17px;font-weight:800;color:#1C2B2D;">Laura Peña</div>
+                           <div style="font-size:12px;color:#E65100;font-weight:600;">Coordinadora de Bioseguridad · Planta Girón</div>
+                           <div style="font-size:11.5px;color:#78909C;margin-top:2px;">Nominada por Sandra Ruiz (HSEQ) · Junio 2026</div>
+                       </div>
+                   </div>
+                   <p><strong>¿Por qué este reconocimiento?</strong></p>
+                   <p>Laura asumió la tarea de rediseñar completamente el Protocolo de Bioseguridad PSI-2026 sin reducir tiempos de producción. En un plazo de 90 días logró:</p>
+                   <p>🛡️ <strong>40 % de reducción</strong> en incidentes de bioseguridad reportados.<br>
+                   📋 Capacitación del 100 % del personal de planta en el nuevo protocolo.<br>
+                   🤝 Coordinación con proveedores para adecuación de EPP sin costos adicionales.<br>
+                   ✅ Aprobación sin observaciones en la auditoría externa de julio.</p>
+                   <p>Su liderazgo, disciplina y capacidad de gestión son un ejemplo para toda la organización.</p>
+                   <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;">
+                       <button onclick="evAccion('🎉 ¡Felicitaste a Laura Peña! Tu mensaje fue enviado.')" style="background:#E65100;color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
+                           👏 Felicitar
+                       </button>
+                   </div>`
+        },
+        {
+            id: 31, type: 'reconocimientos',
+            tag: '🤝 Trabajo en Equipo', tagBg: '#E3F2FD', tagColor: '#1565C0',
+            title: 'Equipo Comercial Zona Norte · Junio 2026',
+            excerpt: 'Superaron la meta de ventas Q1 en un 18 % gracias a la sinergia y trabajo conjunto de todo el equipo en campo.',
+            date: 'Jun 2026', author: 'Gerencia General',
+            imgs: ['equipo1','equipo2','equipo3'],
+            body: `<div style="display:flex;align-items:center;gap:14px;background:#E3F2FD;border-radius:12px;padding:16px 20px;margin-bottom:20px;">
+                       <div style="width:54px;height:54px;border-radius:50%;background:#1565C0;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;flex-shrink:0;">🤝</div>
+                       <div>
+                           <div style="font-size:17px;font-weight:800;color:#1C2B2D;">Equipo Comercial Zona Norte</div>
+                           <div style="font-size:12px;color:#1565C0;font-weight:600;">Unidad Comercial · Santander y Boyacá</div>
+                           <div style="font-size:11.5px;color:#78909C;margin-top:2px;">Reconocido por Gerencia General · Junio 2026</div>
+                       </div>
+                   </div>
+                   <p><strong>¿Por qué este reconocimiento?</strong></p>
+                   <p>El equipo de asesores comerciales de la Zona Norte demostró que la colaboración y la comunicación constante son la clave para superar los desafíos del mercado:</p>
+                   <p>📈 <strong>+18 % sobre la meta de ventas Q1</strong> — El mejor trimestre en la historia de la zona.<br>
+                   🗺️ Apertura de <strong>23 clientes nuevos</strong> en municipios rurales de Boyacá y Santander.<br>
+                   🐄 Crecimiento del 22 % en el segmento bovino gracias a la estrategia técnico-comercial conjunta.<br>
+                   ⏱️ Reducción del ciclo de venta promedio de 12 a 8 días.</p>
+                   <p>Integrantes destacados: Carlos Mora, Valentina Ríos, Felipe Acosta, Diana López y el líder de zona Andrés Bermúdez.</p>
+                   <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;">
+                       <button onclick="evAccion('🎉 ¡Felicitaste al Equipo Comercial Zona Norte! Tu mensaje fue enviado.')" style="background:#1565C0;color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
+                           👏 Felicitar al equipo
+                       </button>
+                   </div>`
+        },
+        {
+            id: 32, type: 'reconocimientos',
+            tag: '💡 Innovación', tagBg: '#E8F5E9', tagColor: '#2E7D32',
+            title: 'Roberto Pardo — Metalmecánica · Mayo 2026',
+            excerpt: 'Diseñó una solución que optimizó el proceso de producción de equipos, ahorrando 15 horas semanales de operación.',
+            date: 'May 2026', author: 'Dir. de Producción',
+            imgs: ['innov1','innov2','innov3'],
+            body: `<div style="display:flex;align-items:center;gap:14px;background:#E8F5E9;border-radius:12px;padding:16px 20px;margin-bottom:20px;">
+                       <div style="width:54px;height:54px;border-radius:50%;background:#2E7D32;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;flex-shrink:0;">RP</div>
+                       <div>
+                           <div style="font-size:17px;font-weight:800;color:#1C2B2D;">Roberto Pardo</div>
+                           <div style="font-size:12px;color:#2E7D32;font-weight:600;">Técnico Senior de Producción · Metalmecánica</div>
+                           <div style="font-size:11.5px;color:#78909C;margin-top:2px;">Reconocido por Dir. de Producción · Mayo 2026</div>
+                       </div>
+                   </div>
+                   <p><strong>¿Por qué este reconocimiento?</strong></p>
+                   <p>Roberto identificó un cuello de botella en el proceso de ensamble de equipos veterinarios y propuso una solución técnica que ningún proveedor externo había logrado en 2 años:</p>
+                   <p>⚙️ <strong>Jig de posicionamiento</strong> diseñado con materiales disponibles en planta, sin inversión externa.<br>
+                   ⏱️ <strong>15 horas semanales ahorradas</strong> — equivalentes a casi 2 turnos completos de producción.<br>
+                   📉 Reducción del 28 % en el desperdicio de material en el área de corte.<br>
+                   🔩 La solución fue adoptada también por las plantas de Bucaramanga y Cali.</p>
+                   <p>Roberto lleva 8 años en Insumma BG y este reconocimiento es reflejo de su compromiso constante con la mejora continua.</p>
+                   <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;">
+                       <button onclick="evAccion('🎉 ¡Felicitaste a Roberto Pardo! Tu mensaje fue enviado.')" style="background:#2E7D32;color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
+                           👏 Felicitar
+                       </button>
+                   </div>`
+        }
+    ];
+
     // ── Datos de Eventos ──
     const EV_EVENTOS = [
         {
@@ -2268,8 +2362,9 @@
     let _etImgIdx  = 0;
 
     function etOpenArticle(type, id, imgIdx) {
-        const list = type === 'noticias' ? ET_NOTICIAS
-                   : type === 'eventos'  ? EV_EVENTOS
+        const list = type === 'noticias'        ? ET_NOTICIAS
+                   : type === 'eventos'          ? EV_EVENTOS
+                   : type === 'reconocimientos'  ? RC_RECONOCIMIENTOS
                    : ET_COMUNICADOS;
         _etArticle = list.find(a => a.id === id);
         if (!_etArticle) return;
@@ -2355,9 +2450,10 @@
     }
 
     // Inicializar grids al cargar
-    renderEtCards(ET_NOTICIAS,    'et-noticias-grid');
-    renderEtCards(ET_COMUNICADOS, 'et-comunicados-grid');
-    renderEtCards(EV_EVENTOS,     'ev-eventos-grid');
+    renderEtCards(ET_NOTICIAS,       'et-noticias-grid');
+    renderEtCards(ET_COMUNICADOS,    'et-comunicados-grid');
+    renderEtCards(EV_EVENTOS,        'ev-eventos-grid');
+    renderEtCards(RC_RECONOCIMIENTOS,'rc-recon-grid');
 
 </script>
 
