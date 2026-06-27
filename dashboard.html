@@ -1353,11 +1353,7 @@
         <!-- ══ EVENTOS ══ -->
         <section class="section" id="sec-eventos">
             <div class="page-title"><h2>Eventos</h2><p>Actividades corporativas, sociales y de formación</p></div>
-            <div class="section-grid">
-                <div class="sec-card"><span class="sc-tag" style="background:#E8F5E9;color:#2E7D32;">Formación</span><div class="sc-title">Capacitación: Bioseguridad Q2 2026</div><div class="sc-desc">Actualización de protocolos para todo el personal de campo y técnicos de planta. Modalidad virtual.</div><div class="sc-footer" style="margin-bottom:12px;">📅 4 de julio, 2026 · 8:00 am - 12:00 pm</div><button class="btn-primary" style="font-size:13px;padding:8px 18px;">Inscribirme</button></div>
-                <div class="sec-card"><span class="sc-tag" style="background:#FFF3E0;color:#F57C00;">Social</span><div class="sc-title">Celebración aniversario Insumma BG</div><div class="sc-desc">25 años de crecimiento conjunto. Celebración con todos los colaboradores, familias e invitados especiales. Sede Girón.</div><div class="sc-footer" style="margin-bottom:12px;">📅 12 de julio, 2026 · 4:00 pm</div><button class="btn-secondary" style="font-size:13px;padding:8px 18px;">Confirmar asistencia</button></div>
-                <div class="sec-card"><span class="sc-tag" style="background:#E3F2FD;color:#1565C0;">Técnico</span><div class="sc-title">Feria Agropecuaria Bucaramanga 2026</div><div class="sc-desc">Participación institucional. Se necesitan representantes técnicos por área para atender el stand de Insumma BG.</div><div class="sc-footer" style="margin-bottom:12px;">📅 20-23 agosto, 2026 · Bucaramanga</div><button class="btn-secondary" style="font-size:13px;padding:8px 18px;">Postularme</button></div>
-            </div>
+            <div class="et-grid" id="ev-eventos-grid"></div>
         </section>
 
         <!-- ══ BUZÓN DE IDEAS ══ -->
@@ -2004,6 +2000,16 @@
         // Producto
         prod1:  'assets/img/comunicados/prod-1.jpg',
         prod2:  'assets/img/comunicados/prod-2.jpg',
+        // Eventos corporativos
+        bio1:   'assets/img/eventos/bio-1.jpg',
+        bio2:   'assets/img/eventos/bio-2.jpg',
+        bio3:   'assets/img/eventos/bio-3.jpg',
+        aniv1:  'assets/img/eventos/aniv-1.jpg',
+        aniv2:  'assets/img/eventos/aniv-2.jpg',
+        aniv3:  'assets/img/eventos/aniv-3.jpg',
+        feria1: 'assets/img/eventos/feria-1.jpg',
+        feria2: 'assets/img/eventos/feria-2.jpg',
+        feria3: 'assets/img/eventos/feria-3.jpg',
     };
 
     // ── Datos de artículos ──
@@ -2171,12 +2177,100 @@
         document.getElementById('et-comunicados-wrap').style.display = name === 'comunicados' ? '' : 'none';
     }
 
+    // ── Datos de Eventos ──
+    const EV_EVENTOS = [
+        {
+            id: 20, type: 'eventos',
+            tag: 'Formación', tagBg: '#E3F2FD', tagColor: '#1565C0',
+            title: 'Capacitación: Bioseguridad Q2 2026',
+            excerpt: 'Actualización de protocolos para todo el personal de campo y técnicos de planta. Modalidad virtual y presencial. Cupos limitados.',
+            date: '4 jul, 2026 · 8:00 am', author: 'Gestión Humana',
+            imgs: ['bio1','bio2','bio3'],
+            body: `<div style="background:#E3F2FD;border-radius:10px;padding:14px 18px;margin-bottom:18px;display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;">
+                       <span>📅 <strong>Fecha:</strong> 4 de julio de 2026</span>
+                       <span>🕗 <strong>Hora:</strong> 8:00 a.m. – 12:00 m.</span>
+                       <span>📍 <strong>Lugar:</strong> Virtual + Sede Girón</span>
+                       <span>👥 <strong>Cupos:</strong> 40 por sesión</span>
+                   </div>
+                   <p>El área de <strong>Gestión Humana</strong> realiza la actualización obligatoria de protocolos de bioseguridad para personal de campo, operativo y técnico. La formación responde a los cambios normativos del segundo trimestre.</p>
+                   <p><strong>Contenido:</strong></p>
+                   <p>🔬 <strong>Módulo 1:</strong> Normativa vigente — Resolución 0312 y cambios 2026.<br>
+                   🦺 <strong>Módulo 2:</strong> Uso correcto del EPP por área de trabajo.<br>
+                   🧪 <strong>Módulo 3:</strong> Protocolos de manipulación de productos veterinarios.<br>
+                   📋 <strong>Módulo 4:</strong> Registro e informes de incidentes.</p>
+                   <p>La asistencia es <strong>obligatoria</strong> para personal de producción y campo. El certificado de aprobación hace parte de la evaluación de desempeño del semestre.</p>
+                   <div style="margin-top:20px;">
+                       <button onclick="evAccion('¡Te has inscrito en Bioseguridad Q2! Recibirás el enlace por correo.')" style="background:#1565C0;color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
+                           <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                           Inscribirme
+                       </button>
+                   </div>`
+        },
+        {
+            id: 21, type: 'eventos',
+            tag: 'Social', tagBg: '#FFF3E0', tagColor: '#E65100',
+            title: 'Celebración aniversario 25 años — Insumma BG',
+            excerpt: '25 años de crecimiento conjunto. Gran celebración con colaboradores, familias e invitados especiales. Sede principal Girón.',
+            date: '12 jul, 2026 · 4:00 pm', author: 'Gerencia General',
+            imgs: ['aniv1','aniv2','aniv3'],
+            body: `<div style="background:#FFF3E0;border-radius:10px;padding:14px 18px;margin-bottom:18px;display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;">
+                       <span>📅 <strong>Fecha:</strong> 12 de julio de 2026</span>
+                       <span>🕓 <strong>Hora:</strong> 4:00 p.m. en adelante</span>
+                       <span>📍 <strong>Lugar:</strong> Sede principal, Girón</span>
+                       <span>👨‍👩‍👧 <strong>Invitados:</strong> Colaboradores y familia</span>
+                   </div>
+                   <p><strong>Insumma Business Group S.A. celebra 25 años</strong> de historia, crecimiento y compromiso con el sector agropecuario colombiano. Una noche especial para reconocer a nuestro equipo humano.</p>
+                   <p><strong>Programa del evento:</strong></p>
+                   <p>🎤 Palabras de la Gerencia General y reconocimientos especiales.<br>
+                   🏆 Entrega de premios — Colaboradores destacados 2026.<br>
+                   🎵 Show musical en vivo — Banda local de Girón.<br>
+                   🍽️ Cena buffet para todos los asistentes y sus familias.<br>
+                   📸 Fotografías profesionales y recuerdo del evento.</p>
+                   <p>Cada colaborador puede llevar hasta <strong>2 acompañantes</strong>. Confirmar asistencia antes del 5 de julio para la organización del catering.</p>
+                   <div style="margin-top:20px;">
+                       <button onclick="evAccion('¡Asistencia confirmada! Recuerda registrar a tus acompañantes antes del 5 de julio.')" style="background:#E65100;color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
+                           <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                           Confirmar asistencia
+                       </button>
+                   </div>`
+        },
+        {
+            id: 22, type: 'eventos',
+            tag: 'Institucional', tagBg: '#E8F5E9', tagColor: '#2E7D32',
+            title: 'Feria Agropecuaria Bucaramanga 2026',
+            excerpt: 'Participación institucional de Insumma BG. Se buscan representantes técnicos por área para atender el stand en Bucaramanga.',
+            date: '20–23 ago, 2026 · Bucaramanga', author: 'Dirección Comercial',
+            imgs: ['feria1','feria2','feria3'],
+            body: `<div style="background:#E8F5E9;border-radius:10px;padding:14px 18px;margin-bottom:18px;display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;">
+                       <span>📅 <strong>Fechas:</strong> 20 al 23 de agosto 2026</span>
+                       <span>📍 <strong>Lugar:</strong> Corferias Bucaramanga</span>
+                       <span>🏢 <strong>Stand:</strong> Pabellón 3, módulo B-12</span>
+                       <span>🎯 <strong>Perfiles:</strong> Técnicos, asesores y ventas</span>
+                   </div>
+                   <p><strong>Insumma Business Group</strong> participará con stand propio en la Feria Agropecuaria de Bucaramanga 2026, uno de los eventos del sector más importantes de la región.</p>
+                   <p><strong>Actividades en el stand:</strong></p>
+                   <p>🐄 Demostración de productos línea Salud Animal.<br>
+                   🌾 Muestra de línea Nutrición — Proteínas Max 2026.<br>
+                   💬 Asesoría técnica directa a visitantes y clientes.<br>
+                   📦 Toma de pedidos especiales feria con condiciones preferenciales.</p>
+                   <p>Se requieren <strong>6 representantes</strong> en turnos de 4 horas. Insumma cubre transporte, alimentación y hospedaje. Los participantes recibirán bonificación por asistencia.</p>
+                   <div style="margin-top:20px;">
+                       <button onclick="evAccion('¡Postulación enviada! El área comercial confirmará tu participación antes del 1 de agosto.')" style="background:#2E7D32;color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
+                           <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                           Postularme
+                       </button>
+                   </div>`
+        }
+    ];
+
     // ── Modal ──
     let _etArticle = null;
     let _etImgIdx  = 0;
 
     function etOpenArticle(type, id, imgIdx) {
-        const list = type === 'noticias' ? ET_NOTICIAS : ET_COMUNICADOS;
+        const list = type === 'noticias' ? ET_NOTICIAS
+                   : type === 'eventos'  ? EV_EVENTOS
+                   : ET_COMUNICADOS;
         _etArticle = list.find(a => a.id === id);
         if (!_etArticle) return;
         _etImgIdx = imgIdx || 0;
@@ -2244,10 +2338,26 @@
     // Cerrar con Escape
     document.addEventListener('keydown', e => { if (e.key === 'Escape') etClose(); });
 
+    // Toast de acción para eventos
+    function evAccion(msg) {
+        let t = document.getElementById('ev-toast');
+        if (!t) {
+            t = document.createElement('div');
+            t.id = 'ev-toast';
+            t.style.cssText = 'position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:#1C2B2D;color:#fff;padding:13px 22px;border-radius:10px;font-size:13.5px;font-weight:600;z-index:9999;opacity:0;transition:opacity .25s,transform .25s;max-width:90vw;text-align:center;box-shadow:0 6px 24px rgba(0,0,0,.3);';
+            document.body.appendChild(t);
+        }
+        t.textContent = msg;
+        t.style.opacity = '1';
+        t.style.transform = 'translateX(-50%) translateY(0)';
+        clearTimeout(t._to);
+        t._to = setTimeout(() => { t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(20px)'; }, 3800);
+    }
 
     // Inicializar grids al cargar
     renderEtCards(ET_NOTICIAS,    'et-noticias-grid');
     renderEtCards(ET_COMUNICADOS, 'et-comunicados-grid');
+    renderEtCards(EV_EVENTOS,     'ev-eventos-grid');
 
 </script>
 
